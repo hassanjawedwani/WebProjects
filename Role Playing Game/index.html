@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Role Playing Game</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game">
+        <div class="stats">
+          <span>
+            XP: <strong><span id="xp-text">0</span></strong>
+          </span>
+          <span>
+            Health: <strong><span id="health-text">100</span></strong>
+          </span>
+          <span>
+            Gold: <strong><span id="gold-text">50</span></strong>
+          </span>
+        </div>
+        <div class="controls">
+          <button type="button" id="button1">Go to store</button>
+          <button type="button" id="button2">Go to cave</button>
+          <button type="button" id="button3">Fight dragon</button>
+        </div>
+        <div class="message" id="message-text">
+          Welcome to Dragon Repeller. You must defeat the dragon that is
+          preventing people from leaving the town. You are in the town square.
+          Where do you want to go? Use the buttons above.
+        </div>
+      </div>
+    </div>
+  <script src="script.js"></script>
+  </body>
+</html>
