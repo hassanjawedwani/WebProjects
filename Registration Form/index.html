@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Registration Form</title>
   </head>
   <body>
@@ -53,15 +54,17 @@
           >
           </textarea>
         </fieldset>
-        <input
-          type="checkbox"
-          id="terms-and-conditions"
-          name="terms-and-conditions"
-          required
-        />
-        <label for="terms-and-conditions">
-          I accept the terms and <a href="#"> terms and conditions </a>
-        </label>
+        <fieldset>
+          <input
+            type="checkbox"
+            id="terms-and-conditions"
+            name="terms-and-conditions"
+            required
+          />
+          <label for="terms-and-conditions">
+            I accept the terms and <a href="#"> terms and conditions </a>
+          </label>
+        </fieldset>
         <button type="submit">Submit</button>
       </form>
     </div>
