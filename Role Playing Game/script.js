@@ -1,14 +1,18 @@
 let xp = 0;
 let health = 100;
 let gold = 50;
+let isShowMonsterStats = false;
 
 const xpText = document.getElementById("xp-text");
 const healthText = document.getElementById("health-text");
 const goldText = document.getElementById("gold-text");
 const button1 = document.getElementById("button1");
 const button2 = document.getElementById("button2");
-const button3 = document.getElementById("button3");
 const messageText = document.getElementById("message-text");
+const button3 = document.getElementById("button3");
+const monsterStats = document.getElementById("monster-stats");
+const monsterNameText = document.getElementById("monster-name");
+const monsterHealthText = document.getElementById("monster-health");
 
 const weapons = [
   {
@@ -35,9 +39,9 @@ const monsters = {
   slime: {
     name: "slime",
     health: 100,
-    damage: 10
+    damage: 10,
   },
-}
+};
 
 const locations = {
   store: {
@@ -48,16 +52,25 @@ const locations = {
     ],
     "button function": [buyHealth, buyWeapon, goTown],
     text: "You enter the store",
+    isShowMonsterStats: false,
   },
   town: {
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button function": [goStore, goCave, fightDragon],
     text: `You are in the town square. You see a sign that says "Store".`,
+    isShowMonsterStats: false,
   },
   cave: {
     "button text": ["Fight Slime", "Fight fanged beast", "Go to town square"],
     "button function": [fightSlime, fightFanged, goTown],
     text: `You enter the cave. You see some monsters.`,
+    isShowMonsterStats: false,
+  },
+  slime: {
+    "button text": ["Attack", "Dodge", "Run"],
+    "button function": [attack, dodge, goTown],
+    text: `You are fighting a monster.`,
+    isShowMonsterStats: true,
   },
 };
 
@@ -69,6 +82,10 @@ const updateLocation = (location) => {
   button2.onclick = location["button function"][1];
   button3.onclick = location["button function"][2];
   messageText.innerText = location.text;
+  isShowMonsterStats = location.isShowMonsterStats;
+  isShowMonsterStats
+    ? monsterStats.classList.remove("hide")
+    : monsterStats.classList.add("hide");
 };
 
 button1.onclick = goStore;
@@ -119,12 +136,18 @@ function goCave() {
 }
 
 function fightSlime() {
-  
+  const monsterName = "slime";
+  updateLocation(locations[monsterName]);
+  const monster = monsters[monsterName];
+  monsterNameText.innerText = monster.name;
+  monsterHealthText.innerText = monster.health;
 }
 
-function fightFanged() {
+function attack() {}
 
-}
+function dodge() {}
+
+function fightFanged() {}
 
 // fight Dragon buttons functionalities
 
