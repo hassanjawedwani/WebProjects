@@ -1,6 +1,6 @@
 let xp = 0;
 let health = 100;
-let gold = 50;
+let gold = 60;
 let isShowMonsterStats = false;
 let monsterHealth = 100;
 let currentMonster = "";
@@ -48,6 +48,12 @@ const monsters = {
     health: 100,
     damage: 20,
   },
+  dragon: {
+    name: "dragon",
+    health: 100,
+    damage: 30,
+  },
+
 };
 
 const locations = {
@@ -85,6 +91,12 @@ const locations = {
     text: `You are fighting fange monster.`,
     isShowMonsterStats: true,
   },
+  dragon: {
+    "button text": ["Attack", "Dodge", "Run"],
+    "button function": [attack, dodge, goTown],
+    text: `You are fighting dragon monster.`,
+    isShowMonsterStats: true,
+  },
 };
 
 const updateLocation = (location) => {
@@ -103,6 +115,7 @@ const updateLocation = (location) => {
 
 button1.onclick = goStore;
 button2.onclick = goCave;
+button3.onclick = fightDragon;
 
 function goStore() {
   updateLocation(locations["store"]);
@@ -193,4 +206,9 @@ function fightFanged() {
 
 // fight Dragon buttons functionalities
 
-function fightDragon() {}
+function fightDragon() {
+  const monsterName = "dragon";
+  updateLocation(locations[monsterName]);
+  currentMonster = monsters[monsterName];
+  updateMonsterStats(currentMonster);
+}
