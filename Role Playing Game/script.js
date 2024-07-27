@@ -1,9 +1,9 @@
 let xp = 0;
 let health = 100;
-let gold = 60;
+let gold = 850;
 let isShowMonsterStats = false;
-let monsterHealth = 100;
-let currentMonster = "";
+let monsterHealth;
+let currentMonster;
 
 const xpText = document.getElementById("xp-text");
 const healthText = document.getElementById("health-text");
@@ -35,7 +35,7 @@ const weapons = [
   },
 ];
 
-const inventory = ["stick"];
+let inventory = ["stick"];
 
 const monsters = {
   slime: {
@@ -53,7 +53,6 @@ const monsters = {
     health: 100,
     damage: 30,
   },
-
 };
 
 const locations = {
@@ -96,6 +95,24 @@ const locations = {
     "button function": [attack, dodge, goTown],
     text: `You are fighting dragon monster.`,
     isShowMonsterStats: true,
+  },
+  lose: {
+    "button text": ["restart", "restart", "restart"],
+    "button function": [restart, restart, restart],
+    text: `wanna play again?`,
+    isShowMonsterStats: false,
+  },
+  win: {
+    "button text": ["Go to town", "Go to town", "Go to town"],
+    "button function": [goTown, goTown, goTown],
+    text: `Now defeat other monsters to win a game.`,
+    isShowMonsterStats: false,
+  },
+  winGame: {
+    "button text": ["Play Again", "Play Again", "Play Again"],
+    "button function": [restart, restart, restart],
+    text: `You won the game\nwanna play again?`,
+    isShowMonsterStats: false,
   },
 };
 
@@ -169,8 +186,15 @@ function updateMonsterStats(monster) {
 function fightSlime() {
   const monsterName = "slime";
   updateLocation(locations[monsterName]);
+  monsterHealth = monsters[monsterName].health;
   currentMonster = monsters[monsterName];
   updateMonsterStats(currentMonster);
+}
+
+function getAward() {
+  gold += 30;
+  goldText.innerText = gold;
+  messageText.innerText += "\nYou got 30 gold.";
 }
 
 function attack() {
@@ -181,15 +205,23 @@ function attack() {
       messageText.innerText += "\nYou attacked the monster.";
     } else {
       health -= currentMonster.damage;
-      console.log(currentMonster, health)
+      console.log(currentMonster, health);
       healthText.innerText = health;
       messageText.innerText += "\nMonster attacked you.";
     }
   }
   if (health <= 0) {
     messageText.innerText = "You lose the game";
-  } else if (monsterHealth <= 0) {
-    messageText.innerText = "You defeated the monster";
+    updateLocation(locations["lose"]);
+  }
+  if (monsterHealth <= 0) {
+    if (currentMonster.name === "dragon") {
+      updateLocation(locations["winGame"]);
+    } else {
+      updateLocation(locations["win"]);
+    }
+    messageText.innerText += "You defeated the monster";
+    getAward();
   }
 }
 
@@ -200,6 +232,7 @@ function dodge() {
 function fightFanged() {
   const monsterName = "fange";
   updateLocation(locations[monsterName]);
+  monsterHealth = monsters[monsterName].health;
   currentMonster = monsters[monsterName];
   updateMonsterStats(currentMonster);
 }
@@ -209,6 +242,21 @@ function fightFanged() {
 function fightDragon() {
   const monsterName = "dragon";
   updateLocation(locations[monsterName]);
+  monsterHealth = monsters[monsterName].health;
   currentMonster = monsters[monsterName];
   updateMonsterStats(currentMonster);
+}
+
+function restart() {
+  xp = 0;
+  health = 100;
+  gold = 50;
+  xpText.innerText = xp;
+  healthText.innerText = health;
+  goldText.innerText = gold;
+  isShowMonsterStats = false;
+  monsterNameText.innerText = "";
+  monsterHealthText.innerText = 100;
+  inventory = ["stick"];
+  updateLocation(locations["town"]);
 }
