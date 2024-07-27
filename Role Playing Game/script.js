@@ -2,6 +2,8 @@ let xp = 0;
 let health = 100;
 let gold = 50;
 let isShowMonsterStats = false;
+let monsterHealth = 100;
+let currentMonster = "";
 
 const xpText = document.getElementById("xp-text");
 const healthText = document.getElementById("health-text");
@@ -41,6 +43,11 @@ const monsters = {
     health: 100,
     damage: 10,
   },
+  fange: {
+    name: "fange",
+    health: 100,
+    damage: 20,
+  },
 };
 
 const locations = {
@@ -69,7 +76,13 @@ const locations = {
   slime: {
     "button text": ["Attack", "Dodge", "Run"],
     "button function": [attack, dodge, goTown],
-    text: `You are fighting a monster.`,
+    text: `You are fighting Slime monster.`,
+    isShowMonsterStats: true,
+  },
+  fange: {
+    "button text": ["Attack", "Dodge", "Run"],
+    "button function": [attack, dodge, goTown],
+    text: `You are fighting fange monster.`,
     isShowMonsterStats: true,
   },
 };
@@ -135,19 +148,48 @@ function goCave() {
   updateLocation(locations["cave"]);
 }
 
-function fightSlime() {
-  const monsterName = "slime";
-  updateLocation(locations[monsterName]);
-  const monster = monsters[monsterName];
+function updateMonsterStats(monster) {
   monsterNameText.innerText = monster.name;
   monsterHealthText.innerText = monster.health;
 }
 
-function attack() {}
+function fightSlime() {
+  const monsterName = "slime";
+  updateLocation(locations[monsterName]);
+  currentMonster = monsters[monsterName];
+  updateMonsterStats(currentMonster);
+}
 
-function dodge() {}
+function attack() {
+  if (health > 0 && monsterHealth > 0) {
+    if (Math.random() > 0.5) {
+      monsterHealth -= weapons[inventory.length - 1].damage;
+      monsterHealthText.innerText = monsterHealth;
+      messageText.innerText += "\nYou attacked the monster.";
+    } else {
+      health -= currentMonster.damage;
+      console.log(currentMonster, health)
+      healthText.innerText = health;
+      messageText.innerText += "\nMonster attacked you.";
+    }
+  }
+  if (health <= 0) {
+    messageText.innerText = "You lose the game";
+  } else if (monsterHealth <= 0) {
+    messageText.innerText = "You defeated the monster";
+  }
+}
 
-function fightFanged() {}
+function dodge() {
+  messageText.innerText = `You dodge the attact from ${currentMonster.name}`;
+}
+
+function fightFanged() {
+  const monsterName = "fange";
+  updateLocation(locations[monsterName]);
+  currentMonster = monsters[monsterName];
+  updateMonsterStats(currentMonster);
+}
 
 // fight Dragon buttons functionalities
 
