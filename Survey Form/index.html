@@ -27,7 +27,7 @@
           placeholder="Enter your Email"
           required
         />
-        <label for="age">Age (optional)</label>
+        <label for="age">Age <span class="clue">(optional)</span></label>
         <input type="number" id="age" name="age" placeholder="Age" required />
         <label for="role">Which option best describes your current role?</label>
         <select id="role" name="role">
@@ -67,13 +67,14 @@
         </select>
         <fieldset>
           <legend>
-            What would you like to see improved? (Check all that apply)
+            What would you like to see improved? <span class="clue">(Check all that apply)</span>
           </legend>
           <label for="front-end-projects">
             <input
               type="checkbox"
               id="front-end-projects"
               name="front-end-projects"
+              value="front-end-projects"
             />
             Front-end Projects
           </label>
@@ -83,6 +84,7 @@
               type="checkbox"
               id="backend-projects"
               name="backend-projects"
+              value="backend-projects"
             />
             Backend Projects
           </label>
@@ -92,12 +94,18 @@
               type="checkbox"
               id="data-visualization"
               name="data-visualization"
+              value="data-visualization"
             />
             Data Visualization
           </label>
 
           <label for="challenges">
-            <input type="checkbox" id="challenges" name="challenges" />
+            <input
+              type="checkbox"
+              id="challenges"
+              name="challenges"
+              value="challenges"
+            />
             Challenges
           </label>
 
@@ -106,6 +114,7 @@
               type="checkbox"
               id="open-source-community"
               name="open-source-community"
+              value="open-source-community"
             />
             Open Source Community
           </label>
@@ -115,27 +124,33 @@
               type="checkbox"
               id="gitter-help-rooms"
               name="gitter-help-rooms"
+              value="gitter-help-rooms"
             />
-            Gitter help rooms
+            Gitter Help Rooms
           </label>
 
           <label for="videos">
-            <input type="checkbox" id="videos" name="videos" />
+            <input type="checkbox" id="videos" name="videos" value="videos" />
             Videos
           </label>
 
           <label for="city-meetups">
-            <input type="checkbox" id="city-meetups" name="city-meetups" />
+            <input
+              type="checkbox"
+              id="city-meetups"
+              name="city-meetups"
+              value="city-meetups"
+            />
             City Meetups
           </label>
 
           <label for="wiki">
-            <input type="checkbox" id="wiki" name="wiki" />
+            <input type="checkbox" id="wiki" name="wiki" value="wiki" />
             Wiki
           </label>
 
           <label for="forum">
-            <input type="checkbox" id="forum" name="forum" />
+            <input type="checkbox" id="forum" name="forum" value="forum" />
             Forum
           </label>
 
@@ -144,6 +159,7 @@
               type="checkbox"
               id="additional-courses"
               name="additional-courses"
+              value="additional-courses"
             />
             Additional Courses
           </label>
