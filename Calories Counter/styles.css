@@ -1,0 +1,47 @@
+:root {
+  --color-darkblue: #1B1B32;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1B1B32;
+  color: white;
+}
+
+.container {
+  width: 90%;
+  min-width: 320px;
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+fieldset {
+  padding: 10px;
+  margin-top: 1rem;
+}
+
+fieldset:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.controls {
+  margin-bottom: 0.7rem
+}
+
+button {
+  background-color: gold;
+  height: 1.4rem;
+  padding: 0 5px;
+}
