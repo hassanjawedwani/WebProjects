@@ -2,9 +2,14 @@ const budgetInput = document.getElementById("budget");
 const form = document.getElementById("form");
 const dropdown = document.getElementById("dropdown");
 const addEntryBtn = document.getElementById("add-entry");
+const outputContainer = document.querySelector("#output-container");
+const clearBtn = document.getElementById('clear-button');
 
-form.addEventListener("submit", submitHandle);
+
+
+form.addEventListener("submit", submitHandle); // bug handle instead of handler
 addEntryBtn.addEventListener("click", addEntryHandler);
+clearBtn.addEventListener("click", clearHandler);
 
 function submitHandle(e) {
   e.preventDefault();
@@ -47,13 +52,33 @@ function submitHandle(e) {
   }
 
   const budget = changeToNumber(budgetInput.value);
-  const consumedCalories = 
+  const consumedCalories =
     breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
-  const burnedCalories =
-    exerciseCalories;
+  const burnedCalories = exerciseCalories;
+  const deficitOrSurplus =  consumedCalories - (burnedCalories + budget)
   console.log("budget", budget);
   console.log("consumed", consumedCalories);
   console.log("burned", burnedCalories);
+  console.log("deficitorsurplus", deficitOrSurplus);
+  
+  // container.insertAdjacentHTML('beforeend', `<h1>hello</h1>`);
+  const resultString = deficitOrSurplus >= 0 ? "Surplus" : "Deficit";
+  const HTMLString = `
+    <div id="output">
+      <h2>${resultString} ${Math.abs(deficitOrSurplus)}</h2>
+      <hr />
+      <h3>Budget: ${budget}</h3>
+      <h3>Consumed Calories: ${consumedCalories}</h3>
+      <h3>Burned Calories: ${burnedCalories}</h3>
+    </div>
+  `;
+  outputContainer.innerHTML = HTMLString;
+  
+  if (deficitOrSurplus >= 0) {
+    document.querySelector(`#output h2`).classList.add('red');
+  } else {
+    document.querySelector(`#output h2`).classList.add('green');
+  }
 
 }
 
@@ -76,4 +101,8 @@ function addEntryHandler() {
 
 function changeToNumber(str) {
   return Number(str);
+}
+
+function clearHandler() {
+  
 }
