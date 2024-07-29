@@ -102,7 +102,13 @@ function addEntryHandler() {
 function changeToNumber(str) {
   return Number(str);
 }
-
+  
 function clearHandler() {
+  const allNodes = document.querySelectorAll('.input-container');
+  for (const node of allNodes) {
+    node.innerHTML = "";
+  }
+  budgetInput.value = "";
+  outputContainer.innerHTML = "";
   
 }
