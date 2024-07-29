@@ -1,0 +1,57 @@
+:root {
+  --color-darkblue: #0A0A23;
+  --color-white: #fff;
+  --color-gold: gold;
+  --color-dark-gold: rgba(201, 173, 15, 0.842);
+}
+
+*, 
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-darkblue);
+  color: var(--color-white);
+  text-align: center;
+  padding: 10px 0;
+}
+
+details {
+  background-color: var(--color-white);
+  color: var(--color-darkblue);
+  padding: 5px 0;
+  width: 500px;
+  margin: 20px auto;
+  border: 2px solid var(--color-gold);
+  border-radius: 20px;
+
+}
+
+p {
+  margin: 10px 0;;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: var(--color-dark-gold);
+  color: var(--color-white);
+  width: 100px;
+  height: 1.4rem;;
+  margin-right: 1rem;
+}
+
+#output {
+  margin-top: 20px
+}
