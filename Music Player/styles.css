@@ -148,7 +148,3 @@ img {
   outline-style: dashed;
   outline-color: var(--color-gold);
 }
-
-.playlist-songs button{
-  background-color: transparent;
-}
