@@ -134,7 +134,7 @@ img {
   font-size: 1.2rem;
 }
 
-button {
+.song-buttons button {
   cursor: pointer;
   background-color: transparent;
   color: var(--color-white);
@@ -149,10 +149,6 @@ button {
   outline-color: var(--color-gold);
 }
 
-
-.playlist-songs li{
-  list-style: none;
-  padding: 3px;
-  display: flex;
-  justify-content: space-between;
+.playlist-songs button{
+  background-color: transparent;
 }
