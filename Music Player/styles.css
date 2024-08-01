@@ -148,3 +148,57 @@ img {
   outline-style: dashed;
   outline-color: var(--color-gold);
 }
+
+#playlist-songs {
+  background-color: var(--color-dark-gray);
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding: 8px 10px;
+  justify-content: start;
+  list-style: none;
+ 
+}
+
+.playlist-song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  
+}
+
+.playlist-song-info,
+.playlist-song-delete {
+  background-color: transparent;
+  border: none;
+  color: white;
+   cursor: pointer;
+}
+
+.playlist-song-info {
+  display: flex;
+  text-align: start;
+  justify-content: space-between;
+  
+} 
+
+.playlist-song-info:focus {
+  outline: 2px dashed var(--color-gold);
+}
+.playlist-song-delete:focus {
+  outline: 2px dashed var(--color-gold);
+  
+}
+
+
+.playlist-song-title {
+  width: 174px;
+}
+.playlist-song-artist {
+  width: 80px;
+  margin-right: 8px;
+}
+.playlist-song-duration {
+  width: 40px;
+}
