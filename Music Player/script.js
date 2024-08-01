@@ -8,6 +8,18 @@ const userData = {
   currentDuration: 0,
 };
 
+const sortSongs = () => {
+  return userData?.songs.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1
+    }
+    if (a.title > b.title) {
+      return 1
+    }
+    return 0;
+  });
+}
+
 const renderSongs = (songs) => {
   const songsHTML = songs.map((song) => {
     return `
@@ -27,5 +39,5 @@ const renderSongs = (songs) => {
   playlistSongs.innerHTML = songsHTML;
 };
 
-renderSongs(userData?.songs);
+renderSongs(sortSongs());
 
