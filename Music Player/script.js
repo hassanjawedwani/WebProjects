@@ -1,5 +1,6 @@
 const playlistSongs = document.getElementById("playlist-songs");
 const playButton = document.getElementById("play-button");
+const pauseButton = document.getElementById("pause-button");
 
 const allSongs = [
   {
@@ -123,7 +124,13 @@ playButton.addEventListener("click", () => {
   } else {
     playSong(userData?.songs[0].id);
   }
-});
+}); 
+
+pauseButton.addEventListener("click", () => {
+  userData.currentDuration = audio.currentTime;
+  playButton.classList.remove("playing");
+  audio.pause();
+})
 
 const sortSongs = () => {
   return userData?.songs.sort((a, b) => {
