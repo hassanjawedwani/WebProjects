@@ -1,6 +1,8 @@
 const playlistSongs = document.getElementById("playlist-songs");
 const playButton = document.getElementById("play-button");
 const pauseButton = document.getElementById("pause-button");
+const nextButton = document.getElementById("next-button");
+const previousButton = document.getElementById("previous-button");
 
 const allSongs = [
   {
@@ -97,6 +99,32 @@ const playSong = (id) => {
   audio.play();
 };
 
+const nextSong = () => {
+  let currentSongIndex;
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    const currentSongIndex = userData?.songs.indexOf(userData?.currentSong)
+    const nextSong = userData?.songs[currentSongIndex+1]
+    userData.currentSong = nextSong;
+    playSong(nextSong.id)
+  }
+}
+
+//solve out of index error
+
+const previousSong = () => {
+  let currentSongIndex;
+  if (userData?.currentSong === null) {
+    return;
+  } else {
+    const currentSongIndex = userData?.songs.indexOf(userData?.currentSong)
+    const previousSong = userData?.songs[currentSongIndex - 1]
+    userData.currentSong = previousSong;
+    playSong(previousSong.id)
+  }
+}
+
 const renderSongs = (songs) => {
   const songsHTML = songs
     .map((song) => {
@@ -131,6 +159,10 @@ pauseButton.addEventListener("click", () => {
   playButton.classList.remove("playing");
   audio.pause();
 })
+
+nextButton.addEventListener("click", nextSong);
+
+previousButton.addEventListener("click", previousSong);
 
 const sortSongs = () => {
   return userData?.songs.sort((a, b) => {
