@@ -198,3 +198,7 @@ img {
 .playing > i {
   color: var(--color-gold)
 }
+
+.highlight {
+  background-color: var(--color-gray);
+}

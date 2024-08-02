@@ -85,6 +85,14 @@ const userData = {
 
 const audio = new Audio();
 
+const songHighlight = (song) => {
+  const songElements = document.querySelectorAll(".playlist-song")
+  const targetElement = document.getElementById(`song-${song.id}`);
+  songElements.forEach(songEl => songEl.classList.remove("highlight"));
+  targetElement.classList.add("highlight");
+
+}
+
 const playSong = (id) => {
   const song = userData?.songs.find(song => song.id === id);
   audio.src = song.src;
@@ -96,6 +104,7 @@ const playSong = (id) => {
   }
   userData.currentSong = song;
   playButton.classList.add("playing");
+  songHighlight(song);
   audio.play();
 };
 
@@ -124,6 +133,8 @@ const previousSong = () => {
     playSong(previousSong.id)
   }
 }
+
+
 
 const renderSongs = (songs) => {
   const songsHTML = songs
