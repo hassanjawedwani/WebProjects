@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --color-gray: #4D4D62;
-  --color-dark-gray: #1B1B32;
+  --color-gray: #4d4d62;
+  --color-dark-gray: #1b1b32;
   --color-white: #ffffff;
-  --color-gold: #F1BE32;
+  --color-gold: #f1be32;
   --font-lato: "Lato", sans-serif;
 }
 
@@ -46,7 +45,6 @@ body {
   background-color: var(--color-gray);
   display: flex;
   justify-content: space-evenly;
-  
 }
 
 .parallel-lines {
@@ -66,16 +64,16 @@ body {
 .fcc-title,
 .playlist-title {
   width: 40%;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .fcc-title h2,
-.playlist-title h2{
+.playlist-title h2 {
   font-family: var(--font-lato);
   font-size: large;
-  color: var(--color-white)
+  color: var(--color-white);
 }
 
 .player-content,
@@ -91,7 +89,6 @@ body {
   flex-direction: row;
 }
 
-
 .thumbnail {
   width: 40%;
   background-color: var(--color-dark-gray);
@@ -104,7 +101,7 @@ img {
 }
 
 .controls {
-  width: 55%; 
+  width: 55%;
   margin-left: 1rem;
   background-color: var(--color-dark-gray);
   padding: 8px;
@@ -112,7 +109,6 @@ img {
   flex-direction: column;
   justify-content: space-between;
 }
-
 
 .song-title {
   color: var(--color-white);
@@ -124,7 +120,6 @@ img {
   color: var(--color-gold);
   font-size: 1rem;
 }
-
 
 .song-buttons {
   display: flex;
@@ -157,7 +152,6 @@ img {
   padding: 8px 10px;
   justify-content: start;
   list-style: none;
- 
 }
 
 .playlist-song {
@@ -165,7 +159,6 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 2px;
-  
 }
 
 .playlist-song-info,
@@ -173,24 +166,22 @@ img {
   background-color: transparent;
   border: none;
   color: white;
-   cursor: pointer;
+  cursor: pointer;
 }
 
 .playlist-song-info {
   display: flex;
   text-align: start;
   justify-content: space-between;
-  
-} 
+}
 
 .playlist-song-info:focus {
   outline: 2px dashed var(--color-gold);
 }
+
 .playlist-song-delete:focus {
   outline: 2px dashed var(--color-gold);
-  
 }
-
 
 .playlist-song-title {
   width: 174px;
@@ -201,4 +192,9 @@ img {
 }
 .playlist-song-duration {
   width: 40px;
+}
+
+
+.playing > i {
+  color: var(--color-gold)
 }
