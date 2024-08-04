@@ -1,4 +1,5 @@
 const cards = document.querySelector(".cards");
+const dropdown = document.getElementById("filter-dropdown");
 
 const players = [
   {
@@ -135,7 +136,7 @@ const players = [
   },
 ];
 
-window.onload = () => {
+const renderUI = (players) => {
   let stringHTML = ``;
   for (const player of players) {
     stringHTML += `
@@ -149,3 +150,26 @@ window.onload = () => {
   }
   cards.innerHTML = stringHTML;
 };
+
+
+
+const dropdownHandler = (e) => {
+  const selection = e.target.value;
+  if (selection === "all-players") {
+    renderUI(players);
+  } else if (selection === "nicknames") {
+    renderUI(players.filter(player => player.nickname !== "N/A"));
+  } else if (selection === "position-forward") {
+    renderUI(players.filter(player => player.position === "forward"));
+  } else if (selection === "position-midfielder") {
+    renderUI(players.filter(player => player.position === "midfielder"));
+  } else if (selection === "position-defender") {
+    renderUI(players.filter(player => player.position === "defender"));
+  } else if (selection === "position-goalkeeper") {
+    renderUI(players.filter(player => player.position === "goalkeeper"));
+  } 
+}
+
+dropdown.addEventListener("change", dropdownHandler);
+
+renderUI(players);
