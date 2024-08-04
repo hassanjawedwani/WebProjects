@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Date Formatter</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Today's Date <i class="fa-solid fa-calendar-days"></i></h1>
+      <div class="divider"></div>
+      <select name="date" id="dropdown">
+        <option value="1">Day, Month, Year</option>
+        <option value="2">Year, Month, Day</option>
+        <option value="3">Month, Day, Year, Hours, Minutes</option>
+      </select>
+      <div id="output">8-4-2024 14 Hours 56 Minutes</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

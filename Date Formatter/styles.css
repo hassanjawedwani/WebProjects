@@ -1,0 +1,49 @@
+:root {
+  --color-blue-dark: #0A0A23;
+  --color-gold: #F1BE32;
+  --color-white: #FFFFFF;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-blue-dark);
+  color: var(--color-white)
+}
+
+.container {
+  width: 60%;
+  min-width: 400px;
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.divider {
+  border: none;
+  height: 8px;
+  width: 30%;
+  background-color: var(--color-gold);
+  margin-bottom: 1rem;
+}
+
+#dropdown {
+  width: 80%;
+  height: 40px;
+  border: 0;
+  padding: 8px;
+  font-size: 1.1rem;
+}
+
+#output {
+  font-size: 1.7rem;;
+}
