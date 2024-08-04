@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
     <title>HTML/CSS Quiz</title>
   </head>
   <body>
@@ -26,26 +26,31 @@
         <section role="region" aria-labelledby="student-info">
           <h2 id="student-info">Student Info</h2>
           <div class="divider"></div>
-          <div class="student-name">
-            <label for="student-name">Name:</label>
-            <input id="student-name" type="text" required />
-          </div>
 
-          <div class="student-email">
-            <label for="student-email">Email:</label>
-            <input id="student-email" type="email" required />
-          </div>
-          <div class="student-dob">
-            <label for="student-dob"
-              >D.O.B:<span class="hide">(Date of Birth)</span></label
-            >
-            <input id="student-dob" type="text" required />
+          <div class="student-info">
+            <div class="student-name">
+              <label for="student-name">Name:</label>
+              <input id="student-name" type="text" required />
+            </div>
+
+            <div class="student-email">
+              <label for="student-email">Email:</label>
+              <input id="student-email" type="email" required />
+            </div>
+
+            <div class="student-dob">
+              <label for="student-dob">
+                D.O.B:<span class="hide">(Date of Birth)</span>
+              </label>
+              <input id="student-dob" type="date" required />
+            </div>
           </div>
         </section>
+
         <section role="region" aria-labelledby="html-questions">
           <h2 id="html-questions">HTML</h2>
           <div class="divider"></div>
-          <div class="question-block">
+          <div class="html-question-block">
             <h3>1</h3>
             <fieldset>
               <legend>
@@ -64,7 +69,7 @@
               </ul>
             </fieldset>
           </div>
-          <div class="question-block">
+          <div class="html-question-block">
             <h3>2</h3>
             <fieldset>
               <legend>
@@ -85,28 +90,30 @@
           </div>
         </section>
         <section role="region" aria-labelledby="css-questions">
-          <h2 id="css-questions">CSS</h2>
+          <h2 id="css-questions"> CSS </h2>
           <div class="divider"></div>
-          <div class="question-block">
-            <label for="dropdown"
-              >Can the CSS margin property accept negative values?</label
-            >
+          <div class="css-question-block">
+            <label for="dropdown"></label>
+              Can the CSS margin property accept negative values?
+            </label>
             <select id="dropdown" name="dropdown">
               <option value="" disabled>Select an option</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
-          <div class="question-block">
+          <div class="css-question-block">
             <label for="query">Do you have any questions:</label>
             <textarea
               name="query"
               id="query"
               placeholder="Who is flexbox..."
+              rows="5"
+              cols="30"
             ></textarea>
           </div>
         </section>
-        <button type="submit">Send</button>
+        <button type="submit" id="submit-button">Send</button>
       </form>
     </main>
     <footer>
