@@ -1,0 +1,62 @@
+:root {
+  --color-blue-dark: #0a0a23;
+  --color-white: #ffffff;
+  --color-gold: #feb93d;
+  --color-gold-dark: #d19843;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-blue-dark);
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-blue-dark);
+}
+
+h1 {
+  color: var(--color-white);
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.app {
+  background-color: var(--color-white);
+  width: 80%;
+  min-width: 25rem;
+  max-width: 25rem;
+  height: 80%;
+  min-height: 30rem;
+  max-height: 30rem;
+  margin: 0 auto;
+  border: 2px solid var(--color-gold);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  display: block;
+  width: 80%;
+  margin: 1.5rem auto;
+  height: 1.8rem;
+  border-radius: 0rem solid var(--color-gold-dark);
+  font-size: 1.1rem;
+  color: var(--color-blue-dark);
+  background-color: var(--color-gold);
+  background-image: linear-gradient(
+    var(--color-gold),
+    var(--color-gold-dark)
+  );
+}
+
+
+.task-container {
+  height: 100%;
+  overflow: auto;
+}
