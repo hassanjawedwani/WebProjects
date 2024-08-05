@@ -1,0 +1,18 @@
+:root {
+  --color-black-light: #0A0A23;
+  --color-blue-light: #3B82C1;
+  --color-white: #3B82C1;
+  --color-white-light: #DFDFE2;
+}
+
+*,
+*::before
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
