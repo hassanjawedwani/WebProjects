@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Todo App</title>
   </head>
   <body>
@@ -11,7 +18,7 @@
     <div class="app">
       <button class="btn btn-medium">Add New Task</button>
       <div class="task-container">
-        <!-- <div class="task">
+        <div class="task">
           <p><strong>Title: </strong> hello world</p>
           <p><strong>Date: </strong> hello world</p>
           <p class="description">
@@ -27,8 +34,22 @@
             <button type="button" class="btn btn-small">Edit</button>
             <button type="button" class="btn btn-small">Delete</button>
           </div>
-        </div> -->
+        </div>
       </div>
+      <form id="form" class="hide">
+        <div class="cross">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div>
+          <label for="input-title">Title</label>
+          <input type="text" id="input-title" name="input-title" required />
+          <label for="input-date">Date</label>
+          <input type="date" id="input-date" />
+          <label for="input-description">Description</label>
+          <textarea id="input-description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-medium">Add Task</button>
+      </form>
     </div>
   </body>
 </html>
