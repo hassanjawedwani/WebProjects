@@ -16,29 +16,12 @@
   <body>
     <h1>Todo App</h1>
     <div class="app">
-      <button class="btn btn-medium">Add New Task</button>
-      <div class="task-container">
-        <div class="task">
-          <p><strong>Title: </strong> hello world</p>
-          <p><strong>Date: </strong> hello world</p>
-          <p class="description">
-            <strong>Description: </strong> Lorem ipsum dolor sit, amet
-            consectetur adipisicing elit. Reprehenderit, dignissimos quam iure
-            quisquam quo ad tempore deserunt fugiat cupiditate doloremque
-            recusandae, quibusdam repellendus minima dolorum sequi laudantium
-            nihil, hic repellat expedita facere soluta. Expedita autem molestias
-            delectus sint? Repudiandae voluptates ullam nisi nesciunt adipisci
-            vero aperiam praesentium sapiente amet velit?
-          </p>
-          <div class="task-controls">
-            <button type="button" class="btn btn-small">Edit</button>
-            <button type="button" class="btn btn-small">Delete</button>
-          </div>
-        </div>
-      </div>
+      <button class="btn btn-medium" id="new-task-button">Add New Task</button>
       <form id="form" class="hide">
         <div class="cross">
-          <i class="fa-solid fa-xmark"></i>
+          <button type="button" id="cross-button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div>
           <label for="input-title">Title</label>
@@ -50,6 +33,10 @@
         </div>
         <button type="submit" class="btn btn-medium">Add Task</button>
       </form>
+      <div class="task-container">
+        
+      </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
