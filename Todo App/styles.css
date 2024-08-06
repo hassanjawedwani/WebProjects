@@ -41,22 +41,54 @@ h1 {
 }
 
 .btn {
-  display: block;
-  width: 80%;
-  margin: 1.5rem auto;
-  height: 1.8rem;
-  border-radius: 0rem solid var(--color-gold-dark);
+  border-radius: 0;
+  border: 3px solid var(--color-gold-dark);
   font-size: 1.1rem;
   color: var(--color-blue-dark);
   background-color: var(--color-gold);
+}
+
+.btn:hover {
   background-image: linear-gradient(
+    to bottom,
     var(--color-gold),
     var(--color-gold-dark)
   );
+  cursor: pointer;
 }
 
+.btn:active {
+  background-color: var(--color-gold-dark);
+  border-color: var(--color-gold-dark);
+}
+
+.btn-medium {
+  display: block;
+  width: 80%;
+  height: 2rem;
+  margin: 1.5rem auto;
+
+}
+
+.btn-small {
+  width: 7rem;
+  height: 1.7rem;
+  margin: 0.5rem 0.4rem;
+}
 
 .task-container {
   height: 100%;
   overflow: auto;
+}
+
+.task {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.task .description {
+  line-height: 1.3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
