@@ -5,6 +5,7 @@ const inputTitle = document.getElementById("input-title");
 const inputDate = document.getElementById("input-date");
 const inputDescription = document.getElementById("input-description");
 const taskContainer = document.querySelector(".task-container");
+const formBtn  = document.getElementById("form-button")
 
 let taskArr = JSON.parse(localStorage.getItem("tasks")) ||  [];
 
@@ -12,8 +13,27 @@ const newTaskBtnHandler = () => {
   form.classList.remove("hide");
 };
 
+const updateTask = (id) => {
+  for (const task of taskArr) {
+    if (task.id === id) {
+      task.title = inputTitle.value;
+      task.date = inputDate.value;
+      task.description = inputDescription.value;
+    }
+  }
+  crossBtnHandler();
+  renderUI();
+}
+
 const editTaskHandler = (id) => {
-  // console.log(id);
+  const task = taskArr.find(task => task.id === id);
+  form.classList.remove("hide");
+  inputTitle.value = task.title;
+  inputDate.value = task.date;
+  inputDescription.value = task.description;
+  formBtn.innerText = "Update Task";
+  formBtn.removeEventListener("click", formHandler);
+  formBtn.addEventListener("click", () => updateTask(task.id));
 }
 
 const deleteTaskHandler = (id) => {
