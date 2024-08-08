@@ -3,6 +3,8 @@
   --color-grey: #5e5e5e;
   --color-grey-dark: #505056;
   --color-grey-dark2x: #3b3b4f;
+  --color-black: #000;
+  --color-white: #fff;
 }
 
 *,
@@ -92,4 +94,52 @@ body {
   border-bottom-right-radius: 20px;
   top: 24px;
   left: -21px;
+}
+
+.left-eye {
+  width: 20px;
+  height: 30px;
+  border-radius: 60%;
+  background-color: var(--color-black);
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  transform: rotate(-5deg);
+}
+
+
+.right-eye {
+  
+  width: 20px;
+  height: 30px;
+  border-radius: 60%;
+  background-color: var(--color-black);
+  position: absolute;
+  top: 40px;
+  left: 110px;
+  transform: rotate(5deg);
+
+
+}
+
+.left-inner-eye {
+  width: 10px;
+  height: 5px;
+  background-color: var(--color-white);
+  border-radius: 60%;
+  transform: rotate(110deg);
+  position: absolute;
+  top: 10px;
+  left: 2px;
+}
+
+.right-inner-eye {
+  width: 10px;
+  height: 5px;
+  background-color: var(--color-white);
+  border-radius: 60%;
+  transform: rotate(100deg);
+  position: absolute;
+  top: 10px;
+  left: 8px;
 }
