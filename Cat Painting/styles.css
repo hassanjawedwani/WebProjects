@@ -107,9 +107,7 @@ body {
   transform: rotate(-5deg);
 }
 
-
 .right-eye {
-  
   width: 20px;
   height: 30px;
   border-radius: 60%;
@@ -118,8 +116,6 @@ body {
   top: 40px;
   left: 110px;
   transform: rotate(5deg);
-
-
 }
 
 .left-inner-eye {
@@ -147,9 +143,9 @@ body {
 .nose {
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-bottom: 8px solid var(--color-black);
-  border-right: 8px solid transparent;
+  border-left: 12px solid transparent;
+  border-bottom: 12px solid var(--color-black);
+  border-right: 12px solid transparent;
   transform: rotate(180deg);
   position: absolute;
   top: 80px;
@@ -164,7 +160,6 @@ body {
   position: absolute;
   top: 100px;
   left: 58px;
-  
 }
 .cat-right-mouth {
   width: 20px;
@@ -174,5 +169,32 @@ body {
   position: absolute;
   top: 100px;
   left: 78px;
+}
 
+.cat-left-whiskers {
+  position: absolute;
+  top: 80px;
+  left: 40px;
+  transform: rotate(10deg);
+}
+
+.cat-left-whiskers div {
+  width: 30px;
+  height: 1px;
+  background-color: var(--color-black);
+  margin: 4px 0;
+}
+
+.cat-right-whiskers {
+  position: absolute;
+  top: 80px;
+  left: 88px;
+  transform: rotate(-10deg);
+}
+
+.cat-right-whiskers div {
+  width: 30px;
+  height: 1px;
+  background-color: var(--color-black);
+  margin: 4px 0;
 }
