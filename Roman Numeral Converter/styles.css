@@ -64,3 +64,16 @@ form button {
   background-color: rgb(240, 197, 87);
   border: 2px solid goldenrod;
 }
+
+#output {
+  font-size: 2.3rem;
+  border: 3px solid white;
+  width: fit-content;
+  height: auto;
+  background-color: #ffffff23;
+  padding: 5px;
+}
+
+.hide {
+  display: none;;
+}
