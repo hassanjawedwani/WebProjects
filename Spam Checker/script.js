@@ -4,8 +4,10 @@ const output = document.getElementById("output");
 
 const isSpam = (msg) => {
   const helpRegex = /please help/i;
-  const dollarRegex = /[0-9]+ hundred|thousand|million|billion dollars/i;
-  const regexList = [helpRegex, dollarRegex];
+  const dollarRegex = /[0-9]+ (?:hundred |thousand |million |billion )?dollars/i;
+  const moneyRegex = /(\s|^)fr[3e][3e] m[0o]n[3e]y(\s|$)/i;
+  const stockRegex = /(\s|^)fr[e3][e3] [5s][7t][0o][c{([]ks(\s|$)/i;
+  const regexList = [helpRegex, dollarRegex, moneyRegex, moneyRegex, stockRegex];
   return regexList.some((regex) => regex.test(msg));
 };
 
