@@ -69,3 +69,8 @@ form button:hover {
     var(--color-gold-dark) 100%
   );
 }
+
+
+#output {
+  font-size: 2rem;
+}
