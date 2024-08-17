@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
     <title>Statics Calculator</title>
   </head>
   <body>
     <h1>Statics Calculator</h1>
     <p>Enter a list of comma-separated numbers.</p>
-    <form>
+    <form onsubmit="calculate(); return false;">
       <label for="numbers"
         >Numbers:
         <input type="text" id="numbers" required />
       </label>
       <button type="submit">Calculate</button>
     </form>
-
     <p>
       The <em>mean</em> of a list of numbers is the average, calculated by
       taking the sum of all numbers and dividing that by the count of numbers.
