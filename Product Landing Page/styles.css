@@ -1,0 +1,19 @@
+:root {
+  --color-lightWhite: #EEEEEE;
+  --color-gold: #F1C40F;
+  --color-black: #000;
+}
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+body {
+  background-color: var(--color-lightWhite);
+}
