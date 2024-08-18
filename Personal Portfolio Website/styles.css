@@ -1,0 +1,111 @@
+:root {
+  --color-red: #BE3144;
+  --color-white: #F0F0F0;
+  --color-darkgrey: #202022;
+  --color-lightblue: #45567D;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+header {
+  background-color: var(--color-red);
+  height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  font-size: 1.5rem;
+  color: var(--color-white);
+}
+
+nav {
+  width: 350px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+nav ul li {
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--color-black)
+}
+
+#welcome-section {
+  height: 90vh;
+  background-color: var(--color-darkgrey);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+}
+
+#welcome-section h1{
+  color: var(--color-white);
+}
+
+#welcome-section p {
+  color: var(--color-red);
+  font-style: italic;
+}
+
+#projects {
+  background-color: var(--color-lightblue);
+  padding: 2rem 0;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  
+
+}
+
+.project-tile {
+  max-width: 400px;
+  max-height: 450px;
+  margin-bottom: 2rem;
+  
+}
+
+.project-tile a {
+  text-decoration: none;
+}
+
+.project-tile img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.project-tile h2 {
+  text-align: center;
+  background-color: var(--color-darkgrey);
+  color: var(--color-white);
+  padding: 1rem 0;
+}
+
+@media (max-width: 700px) {
+  body {
+    color: red;
+  }
+}
