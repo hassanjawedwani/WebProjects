@@ -24,12 +24,11 @@ body {
 }
 
 .penguin {
-  margin-top: 60px;
   width: 250px;
   height: 350px;
-  background-color: red;
   position: relative;
   left: 40%;
+  z-index: 999
 }
 
 .penguin .head {
@@ -131,6 +130,15 @@ top: 60%;
   top: 65%;;
   left: 42%;
 }
+
+.shirt div{
+  font-size: 3rem;
+  position: absolute;
+  top: 65%;
+  left: 38%;
+  z-index: 2;
+}
+
 .penguin .body::before {
   content: "";
   width: 80px;
@@ -152,6 +160,27 @@ top: 60%;
   left: 11%;
   bottom: 0%;
 }
+
+.foot {
+  width: 30px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: orange;
+  position: inherit;
+  top: 90%;
+  z-index: -1;
+}
+
+.foot.left {
+  transform: rotate(70deg);
+  left: 20%;
+}
+
+.foot.right{
+  transform: rotate(-70deg);
+  right: 10%
+}
+
 .left-mountain,
 .right-mountain {
   width: 300px;
