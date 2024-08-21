@@ -68,11 +68,20 @@ h1 {
   height: 3rem;
   border-radius: 10px;
   border: 1px solid black;
+  text-align: center;
+  padding: 2px;
+  
+  
+}
+
+.screen input:focus {
+  outline: 1px solid black;
 }
 
 .screen #output {
   font-size: 1.4rem;
   font-family: sans-serif;
+  color: rgb(41, 39, 39);
 }
 
 
