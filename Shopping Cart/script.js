@@ -85,7 +85,7 @@ products.forEach(({ id, name, price, category }) => {
       <h2>${name}</h2>
       <p>$${price}</p>
       <p>Category: ${category}</p>
-      <button type="button" class="btn" id=${id}>Add to cart</button>
+      <button type="button" class="btn add-cart-btn" id=${id}>Add to cart</button>
     </div>
   `;
 });
@@ -102,3 +102,29 @@ showCartBtn.addEventListener("click", () => {
     showCartBtnText.textContent = "Show";
   }
 });
+
+
+class ShoppingCart {
+  constructor() {
+    this.items = [];
+  }
+
+  addItem(id, items) {
+    const item = items.find(item => item.id === id);
+    this.items.push(item);
+  }
+
+  renderUI() {
+    console.log(this.items);
+  }
+};
+
+const cart = new ShoppingCart();
+
+const addCartBtns = document.getElementsByClassName('add-cart-btn');
+[...addCartBtns].forEach(btn => {
+  btn.addEventListener("click", (event) => {
+    cart.addItem(Number(event.target.id), products);
+    cart.renderUI();
+  });
+})
