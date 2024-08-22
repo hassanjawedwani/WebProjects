@@ -3,6 +3,11 @@ const showCartBtn = document.getElementById("show-cart-btn");
 const cartContainer = document.getElementById("cart-container");
 const showCartBtnText = document.getElementById("show-cart-btn-text");
 const productsContainer = document.getElementById("products-container");
+const cartTotalItems = document.getElementById("cart-total-items");
+const cartSubtotal = document.getElementById("cart-subtotal");
+const cartTaxes = document.getElementById("cart-taxes");
+const cartTotal = document.getElementById("cart-total");
+const clearBtn = document.getElementById("clear-btn");
 let isCartShowing = false;
 
 const products = [
@@ -91,8 +96,6 @@ products.forEach(({ id, name, price, category }) => {
   `;
 });
 
-
-
 showCartBtn.addEventListener("click", () => {
   isCartShowing = !isCartShowing;
   if (isCartShowing) {
@@ -104,47 +107,78 @@ showCartBtn.addEventListener("click", () => {
   }
 });
 
-
 class ShoppingCart {
   constructor() {
     this.items = [];
+    this.tax = 8.25;
   }
 
   addItem(id, items) {
-    const item = items.find(item => item.id === id);
+    const item = items.find((item) => item.id === id);
     const { name, price } = item;
     this.items.push(item);
-    
+
     const totalCountsPerProduct = {};
-    this.items.forEach(dessert => {
-      totalCountsPerProduct[dessert.id] = (totalCountsPerProduct[dessert.id] || 0) + 1;
+    this.items.forEach((dessert) => {
+      totalCountsPerProduct[dessert.id] =
+        (totalCountsPerProduct[dessert.id] || 0) + 1;
     });
-    
+
     const currentProductCount = totalCountsPerProduct[id];
-    const currentProductCountSpan = document.getElementById(`product-count-for-id-${id}`);
+    const currentProductCountSpan = document.getElementById(
+      `product-count-for-id-${id}`
+    );
     console.log(currentProductCount);
     console.log(currentProductCountSpan);
     currentProductCount > 1
-      ? currentProductCountSpan.textContent = `${currentProductCount}x `
-      : productsContainer.innerHTML += `
+      ? (currentProductCountSpan.textContent = `${currentProductCount}x `)
+      : (productsContainer.innerHTML += `
         <div id="product${id}" class="cart-product">
           <p><span id="product-count-for-id-${id}"></span>${name}</p>
           <p>${price}</p>
         </div>
-      `;
+      `);
+    this.calculateTotal();
   }
 
-  renderUI() {
-   console.log(this.items)
+  calculateTax(amount) {
+    return ((this.tax / 100) * amount).toFixed(2);
   }
-};
+
+  calculateTotal() {
+    const subTotal = this.items.reduce((total, item) => total + item.price, 0);
+    const tax = this.calculateTax(subTotal);
+    const total = subTotal + tax;
+    cartSubtotal.textContent = `$${subTotal.toFixed(2)}`;
+    cartTaxes.textContent = `$${parseFloat(tax).toFixed(2)}`;
+    cartTotal.textContent = `$${parseFloat(total).toFixed(2)}`;
+    cartTotalItems.textContent = this.items.length;
+  }
+
+  clearCart() {
+    if (!this.items.length) {
+      alert("already empty");
+      return;
+    }
+    const sure = confirm("Are you sure to delete your cart?");
+    if (sure) {
+      productsContainer.innerHTML = "";
+      cartTotalItems.textContent = 0;
+      cartSubtotal.textContent = "$0";
+      cartTaxes.textContent = "$0";
+      cartTotal.textContent = "$0";
+      this.items = [];
+    }
+  }
+}
 
 const cart = new ShoppingCart();
 
-const addCartBtns = document.getElementsByClassName('add-cart-btn');
-[...addCartBtns].forEach(btn => {
+const addCartBtns = document.getElementsByClassName("add-cart-btn");
+[...addCartBtns].forEach((btn) => {
   btn.addEventListener("click", (event) => {
     cart.addItem(Number(event.target.id), products);
-    cart.renderUI();
   });
-})
+});
+
+clearBtn.addEventListener("click", cart.clearCart.bind(cart));
