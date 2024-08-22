@@ -8,14 +8,16 @@
   </head>
   <body>
     <header>
-      <h1>Desserts Page</h1>
+      <h1 class="title">Desserts Page</h1>
     </header>
     <main>
-      <button type="button"><span>Show</span> Cart</button>
-      <div>
-        <button type="button">Clear Cart</button>
+      <button type="button" id="show-cart-btn" class="btn"><span>Show</span> Cart</button>
+      <div id="cart-container" class="hide">
+        <button type="button" class="btn">Clear Cart</button>
+        <div id="products-container"></div>
         <p>Total number of items: <span>$0</span></p>
         <p>Subtotal: <span>$0</span></p>
+        <p>Taxes: <span>$0</span></p>
         <p>Total: <span>$0</span></p>
       </div>
       <div id="desserts-container"></div>
