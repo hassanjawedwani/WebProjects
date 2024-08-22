@@ -2,6 +2,7 @@ const dessertContainer = document.getElementById("desserts-container");
 const showCartBtn = document.getElementById("show-cart-btn");
 const cartContainer = document.getElementById("cart-container");
 const showCartBtnText = document.getElementById("show-cart-btn-text");
+const productsContainer = document.getElementById("products-container");
 let isCartShowing = false;
 
 const products = [
@@ -111,11 +112,30 @@ class ShoppingCart {
 
   addItem(id, items) {
     const item = items.find(item => item.id === id);
+    const { name, price } = item;
     this.items.push(item);
+    
+    const totalCountsPerProduct = {};
+    this.items.forEach(dessert => {
+      totalCountsPerProduct[dessert.id] = (totalCountsPerProduct[dessert.id] || 0) + 1;
+    });
+    
+    const currentProductCount = totalCountsPerProduct[id];
+    const currentProductCountSpan = document.getElementById(`product-count-for-id-${id}`);
+    console.log(currentProductCount);
+    console.log(currentProductCountSpan);
+    currentProductCount > 1
+      ? currentProductCountSpan.textContent = `${currentProductCount}x `
+      : productsContainer.innerHTML += `
+        <div id="product${id}" class="cart-product">
+          <p><span id="product-count-for-id-${id}"></span>${name}</p>
+          <p>${price}</p>
+        </div>
+      `;
   }
 
   renderUI() {
-    console.log(this.items);
+   console.log(this.items)
   }
 };
 
