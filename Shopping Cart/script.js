@@ -1,4 +1,8 @@
 const dessertContainer = document.getElementById("desserts-container");
+const showCartBtn = document.getElementById("show-cart-btn");
+const cartContainer = document.getElementById("cart-container");
+const showCartBtnText = document.getElementById("show-cart-btn-text");
+let isCartShowing = false;
 
 const products = [
   {
@@ -84,4 +88,17 @@ products.forEach(({ id, name, price, category }) => {
       <button type="button" class="btn" id=${id}>Add to cart</button>
     </div>
   `;
+});
+
+
+
+showCartBtn.addEventListener("click", () => {
+  isCartShowing = !isCartShowing;
+  if (isCartShowing) {
+    cartContainer.classList.remove("hide");
+    showCartBtnText.textContent = "Hide";
+  } else {
+    cartContainer.classList.add("hide");
+    showCartBtnText.textContent = "Show";
+  }
 });
