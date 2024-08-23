@@ -9,9 +9,9 @@
   <body>
     <header>
       <h1 class="title">Advance Dice Game</h1>
-      <button class="btn">Show Rules</button>
+      <button class="btn" id="">Show Rules</button>
       <div class="rules-container">
-        <h2>Rules</h2>
+        <h2 class="point">Rules</h2>
         <ul>
           <li>There are total of six rounds</li>
           <li>You can only three times per rounds</li>
@@ -27,7 +27,7 @@
             dice again two more times
           </li>
         </ul>
-        <h2>Points</h2>
+        <h2 class="point">Points</h2>
         <ul>
           <li>Three of a kind: Sum of all five dice</li>
           <li>Four of a kind: Sum of all five dice</li>
@@ -43,21 +43,19 @@
     </header>
     <main>
       <form>
-        <div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+        <div class="dice">
+          <div class="die"></div>
+          <div class="die"></div>
+          <div class="die"></div>
+          <div class="die"></div>
+          <div class="die"></div>
         </div>
-        <div>
-          <p>
+        <div class="round-text">
             <strong>Rolls: </strong><span>0</span>
             |
-            <strong>Round: </strong><span>0</span>
-          </p>
+            <strong>Round: </strong><span>1</span>
         </div>
-        <div>
+        <div class="score-options">
           <div>
             <label>
               <input type="radio" value="three-of-a-kind" name="score-option" disabled/>
@@ -96,7 +94,7 @@
           </div>
         </div>
         <button type="button" class="btn">Keep the above selected score</button>
-        <button type="button" class="btn">Roll the dice</button>
+        <button type="button" class="btn" id="roll-dice-btn">Roll the dice</button>
       </form>
       <div>
         <h3>Score history (Total Score: <span>0</span>)</h3>
