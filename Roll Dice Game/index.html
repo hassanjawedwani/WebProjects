@@ -58,47 +58,47 @@
         <div class="score-options">
           <div>
             <label>
-              <input type="radio" value="three-of-a-kind" name="score-option" disabled/>
+              <input type="radio" value="three-of-a-kind" id="three-of-a-kind" name="score-option" disabled/>
               Three of a kind<span></span>
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="four-of-a-kind" name="score-option" disabled/>
+              <input type="radio" value="four-of-a-kind" id="four-of-a-kind" name="score-option" disabled/>
               Four of a kind<span></span>
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="full-house" name="score-option" disabled/>
+              <input type="radio" value="full-house" id="full-house" name="score-option" disabled/>
               Full House<span></span>
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="small-straight" name="score-option" disabled/>
+              <input type="radio" value="small-straight" id="small-straight" name="score-option" disabled/>
               Small straight<span></span>
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="large-straight" name="score-option" disabled/>
+              <input type="radio" value="large-straight" id="large-straight" name="score-option" disabled/>
               Large straight<span></span>
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" value="none-of-the-above" name="score-option" disabled/>
+              <input type="radio" value="none-of-the-above" id="none-of-the-above" name="score-option" disabled/>
               None of the above<span></span>
             </label>
           </div>
         </div>
-        <button type="button" class="btn">Keep the above selected score</button>
+        <button type="button" class="btn" id="keep-above-selected-btn">Keep the above selected score</button>
         <button type="button" class="btn" id="roll-dice-btn">Roll the dice</button>
       </form>
       <div>
-        <h3>Score history (Total Score: <span>0</span>)</h3>
-        <ol></ol>
+        <h3>Score history (Total Score: <span id="total-score">0</span>)</h3>
+        <ol id="score-history"></ol>
       </div>
     </main>
     <script src="script.js"></script>
