@@ -28,8 +28,8 @@ const updateRadioOptions = (index, score) => {
 
 const getHighestDuplicates = (arr) => {
   const counts = {};
-  arr.map(num => {
-    counts[num] ? counts[num]++ : counts[num] = 1;
+  arr.map((num) => {
+    counts[num] ? counts[num]++ : (counts[num] = 1);
   });
   let highest = 0;
   for (const num in counts) {
@@ -51,15 +51,31 @@ const getHighestDuplicates = (arr) => {
 };
 
 const resetOptions = () => {
-  radioInputs.forEach(input => {
+  radioInputs.forEach((input) => {
     input.disabled = true;
     input.checked = false;
-  })
-  radioSpans.forEach(span => {
+  });
+  radioSpans.forEach((span) => {
     span.innerHTML = "";
-  })
-}
+  });
+};
 
+const checkFullHouse = (arr) => {
+  const counts = {};
+  arr.forEach((num) => {
+    if (counts[num]) {
+      counts[num]++;
+    } else {
+      counts[num] = 1;
+    }
+  });
+  if (Object.values(counts).includes(3) && Object.values(counts).includes(2)) {
+    updateRadioOptions(2, 25);
+  }
+  else {
+    updateRadioOptions(5, 0);
+  }
+};
 
 const rollDiceHandler = () => {
   if (rolls === 3) {
@@ -70,12 +86,15 @@ const rollDiceHandler = () => {
     rolls++;
     rollsText.textContent = rolls;
     getHighestDuplicates(diceArr);
+    checkFullHouse(diceArr);
   }
 };
 
 const keepAboveSelectedHandler = (scoreValue, inputId) => {
-  const selectedInput = [...radioInputs].find(radio => radio.checked === true);
-  
+  const selectedInput = [...radioInputs].find(
+    (radio) => radio.checked === true
+  );
+
   if (selectedInput) {
     score += Number(selectedInput.value);
     scoreHistory.innerHTML += `<li>${selectedInput.id} : ${selectedInput.value}`;
@@ -93,7 +112,7 @@ const keepAboveSelectedHandler = (scoreValue, inputId) => {
       rollsText.textContent = rolls;
       score = 0;
       totalScore.textContent = score;
-      dice.forEach(die => die.textContent = 0);
+      dice.forEach((die) => (die.textContent = 0));
       diceArr = [];
       scoreHistory.innerHTML = ``;
     }
@@ -101,7 +120,6 @@ const keepAboveSelectedHandler = (scoreValue, inputId) => {
     alert("please roll and select an option before submitting");
   }
 };
-
 
 rollDiceBtn.addEventListener("click", rollDiceHandler);
 keepAboveSelectedBtn.addEventListener("click", keepAboveSelectedHandler);
