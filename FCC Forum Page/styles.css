@@ -8,6 +8,19 @@
   --color-button-html-css: #8BD9F6;
   --color-button-backend: #F9AA23;
   --color-button-carrier: #F0AEA9;
+  --black: #000;
+  --dark-navy: #0a0a23;
+  --dark-grey: #d0d0d5;
+  --medium-grey: #dfdfe2;
+  --light-grey: #f5f6f7;
+  --peach: #f28373;
+  --salmon-color: #f0aea9;
+  --light-blue: #8bd9f6;
+  --light-orange: #f8b172;
+  --light-green: #93cb5b;
+  --golden-yellow: #f1ba33;
+  --gold: #f9aa23;
+  --green: #6bca6b;
 }
 
 *,
@@ -75,3 +88,49 @@ td:not(:first-child) {
   justify-content: center;
 }
 
+.category {
+  display: block;
+  width: fit-content;
+  padding: 3px;
+  color: var(--color-darkblue);
+  text-decoration: none;
+  margin: 10px 0;
+}
+
+.topic-title {
+  text-decoration: none;
+  color: var(--color-grey);
+}
+
+.career {
+  background-color: var(--salmon-color);
+}
+
+.feedback,
+.html-css {
+  background-color: var(--light-blue);
+}
+
+.support {
+  background-color: var(--light-orange);
+}
+
+.general {
+  background-color: var(--light-green);
+}
+
+.javascript {
+  background-color: var(--golden-yellow);
+}
+
+.backend {
+  background-color: var(--gold);
+}
+
+.python {
+  background-color: var(--green);
+}
+
+.motivation {
+  background-color: var(--peach);
+}

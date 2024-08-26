@@ -1,5 +1,17 @@
 const forumData = document.getElementById("forum-data");
 
+
+const allCategories = {
+  299: { category: "Career Advice", className: "career" },
+  409: { category: "Project Feedback", className: "feedback" },
+  417: { category: "freeCodeCamp Support", className: "support" },
+  421: { category: "JavaScript", className: "javascript" },
+  423: { category: "HTML - CSS", className: "html-css" },
+  424: { category: "Python", className: "python" },
+  432: { category: "You Can Do This!", className: "motivation" },
+  560: { category: "Backend Development", className: "backend" },
+};
+
 const forumLatest =
   "https://cdn.freecodecamp.org/curriculum/forum-latest/latest.json";
 const forumTopicUrl = "https://forum.freecodecamp.org/t/";
@@ -38,7 +50,9 @@ const getAvatars = (users, posters) => {
 
       if (avatar_template) {
         const modified_avatar_template = avatar_template.replace(/{size}/, 30);
-        const userAvatarURL =  modified_avatar_template.startsWith("/user_avatar/")
+        const userAvatarURL = modified_avatar_template.startsWith(
+          "/user_avatar/"
+        )
           ? avatarUrl.concat(modified_avatar_template)
           : modified_avatar_template;
         return `<img src="${userAvatarURL}" alt="${user.username}"/>`;
@@ -48,20 +62,33 @@ const getAvatars = (users, posters) => {
   return avatars;
 };
 
+const getCategory = (id) => {
+  const selectedCategory = {};
+  if (allCategories.hasOwnProperty(id)) {
+    selectedCategory.category = allCategories[id].category;
+    selectedCategory.className = allCategories[id].className;
+  } else {
+    selectedCategory.category = "General";
+    selectedCategory.className = "general";
+    selectedCategory.id = 1;
+  }
+  const categoryURL = `${forumCategoryUrl}${selectedCategory.className}/${id}`;
+  return `<a href="${categoryURL}" class="category ${selectedCategory.className}">${selectedCategory.category}</a>`;
+}
+
 const UpdateUI = (data) => {
   const { topic_list, users } = data;
   const { topics } = topic_list;
   console.log("data", data);
   console.log("Topics", topics);
   topics.map((item) => {
-    const { title, views, bumped_at, posts_count, posters } = item;
+    const { title, views, bumped_at, posts_count, posters, category_id , slug, id} = item;
     forumData.innerHTML += `
       <tr>
-        <td>${title}</td>
-        <td><div class="avatar-container">${getAvatars(
-          users,
-          posters
-        )}</div></td>
+        <td><a href="${forumTopicUrl}/${slug}/${id}" class="topic-title">${title}</a>${getCategory(category_id)}</td>
+        <td>
+          <div class="avatar-container">${getAvatars(users, posters)}</div>
+        </td>
         <td>${posts_count - 1}</td>
         <td>${getViews(views)}</td>
         <td>${getActivity(bumped_at)}</td>
