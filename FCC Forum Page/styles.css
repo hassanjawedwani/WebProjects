@@ -45,6 +45,7 @@ main table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  overflow: scroll;
 }
 
 #topics {
@@ -60,9 +61,17 @@ th {
 
 td {
   border-bottom: 2px solid var(--color-grey);
-  padding: 1rem 0;
+  padding: 16px 0;
 }
 
 td:not(:first-child) {
   text-align: center;
 }
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+

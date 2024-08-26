@@ -29,18 +29,40 @@ const getActivity = (posted_time) => {
   }
 };
 
+const getAvatars = (users, posters) => {
+  const avatars = posters
+    .map((poster) => {
+      const { user_id } = poster;
+      const user = users.find((user) => user.id === user_id);
+      const { avatar_template } = user;
+
+      if (avatar_template) {
+        const modified_avatar_template = avatar_template.replace(/{size}/, 30);
+        const userAvatarURL =  modified_avatar_template.startsWith("/user_avatar/")
+          ? avatarUrl.concat(modified_avatar_template)
+          : modified_avatar_template;
+        return `<img src="${userAvatarURL}" alt="${user.username}"/>`;
+      }
+    })
+    .join("");
+  return avatars;
+};
+
 const UpdateUI = (data) => {
-  // console.log(data);
-  const { topic_list } = data;
+  const { topic_list, users } = data;
   const { topics } = topic_list;
+  console.log("data", data);
   console.log("Topics", topics);
   topics.map((item) => {
-    const { title, views, bumped_at } = item;
+    const { title, views, bumped_at, posts_count, posters } = item;
     forumData.innerHTML += `
       <tr>
         <td>${title}</td>
-        <td></td>
-        <td></td>
+        <td><div class="avatar-container">${getAvatars(
+          users,
+          posters
+        )}</div></td>
+        <td>${posts_count - 1}</td>
         <td>${getViews(views)}</td>
         <td>${getActivity(bumped_at)}</td>
       </tr>
