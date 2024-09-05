@@ -29,3 +29,13 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9rem;
   }
 }
+
+
+.section3  img{
+  opacity: 0.4;
+}
+
+.section3 img:hover {
+  opacity: 1;
+}
+
