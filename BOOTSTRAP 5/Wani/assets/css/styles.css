@@ -47,4 +47,31 @@ li {
   list-style: none;
 }
 
+.nav-link, h1, #hero-section h2, #hero-section p {
+  color: var(--bs-primary-color) !important;
+}
 
+#header-hero-section {
+  position: relative;
+}
+
+.custom-shape-divider-bottom-1726011568 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1726011568 svg {
+    position: relative;
+    display: block;
+    width: calc(121% + 1.3px);
+    height: 92px;
+}
+
+.custom-shape-divider-bottom-1726011568 .shape-fill {
+    fill: #FFFFFF;
+}
