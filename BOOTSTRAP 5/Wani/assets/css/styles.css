@@ -75,3 +75,10 @@ li {
 .custom-shape-divider-bottom-1726011568 .shape-fill {
     fill: #FFFFFF;
 }
+
+.card-btn {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+}
