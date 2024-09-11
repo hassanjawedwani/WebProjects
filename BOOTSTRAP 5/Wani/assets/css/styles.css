@@ -82,3 +82,14 @@ li {
   display: block;
   margin: 0 auto;
 }
+
+
+.showcase-section {
+  background-image: linear-gradient(rgba(22, 22, 22, 0.9), rgba(22, 22, 22, 0.9)), url("https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+
+  
+}
