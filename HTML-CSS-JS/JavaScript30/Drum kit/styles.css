@@ -7,6 +7,7 @@
 }
 
 body {
+  background-color: rgb(54, 48, 48);
   background: url('assets/bg.jpg') bottom center;
   background-size: cover;
   background-position: center;
@@ -33,6 +34,7 @@ body {
   flex-direction: column;
   width: 100px;
   background-color: rgb(255, 0, 0, 0.7);
+  transition: all 0.07s;
  
 }
 
