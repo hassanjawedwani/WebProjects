@@ -33,6 +33,7 @@
 .sidebar .recent {
   display: flex;
   flex-direction: column;
+  animation: fadeIn 1.5s;
 }
 
 .sidebar .recent-title {
@@ -53,4 +54,10 @@
 
 .sidebar .recent-entry:hover {
   background-color: #e2e6eb;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
 }
