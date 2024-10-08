@@ -96,8 +96,36 @@ const people = ["Beck, Glenn", "Becker, Carl", "Beckett, Samuel", "Beddoes, Mick
 ];
 
 // ? sort people by alphabetically by last name
-const sorted = people.sort((a, b) => {
 
-})
+// const sorted = people.sort((firstOne, secondOne) => {
+//   const firstOneLastName = firstOne.split(", ")[1]
+//   const secondOneLastName = secondOne.split(", ")[1]
+//   return (firstOneLastName < secondOneLastName) ? -1 : 1;
+
+// })
+
+// const sorted = people.sort((firstOne, secondOne) => {
+//   const firstOnefirstName = firstOne.split(", ")[0]
+//   const secondOnefirstName = secondOne.split(", ")[0]
+//   return  (firstOnefirstName < secondOnefirstName) ? -1 : 1;
+// })
 
 // console.table(sorted)
+
+// ? sum instances of each
+
+const data = ['car', 'walk', 'bike', 'walk', 'bike', 'car', 'walk',
+  "truck", "moto", 'car', 'walk', 'bike', 'walk', 'bike',
+  'car', 'walk', "truck", "moto"];
+
+const record = {};
+
+data.map(instance => {
+  if (record.hasOwnProperty(instance)) {
+    record[instance]++;
+  } else {
+    record[instance] = 1;
+  }
+})
+
+console.log(record);
