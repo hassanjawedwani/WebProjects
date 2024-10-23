@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorsCombinator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+
+      <h1 class="title">Colors<br> Combinator</h1>
+      
+      <div class="color-controls">
+
+        <div class="control">
+          <label for="red" class="red-control-label">Red: </label>
+          <input id="red" type="range" min="0" max="255" class="red-control"/>
+          <div class="output red-output">333</div>
+       </div>
+
+       <div class="control">
+        <label for="green" class="green-control-label">Green: </label>
+        <input id="green" type="range" min="0" max="255" class="control green-control"/>
+        <div class="output green-output">0</div>
+        </div>
+
+        <div class="control">
+          <label for="blue" class="blue-control-label">Blue: </label>
+          <input id="blue"type="range" min="0" max="255" class="control blue-control"/>
+          <div class="output blue-output">333</div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

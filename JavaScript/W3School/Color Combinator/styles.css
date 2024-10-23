@@ -1,0 +1,103 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.12);
+  border: 3px solid grey;
+  width: 80%;
+  min-width: 360px;
+  margin: 30px auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+}
+
+.container .title {
+  text-align: center;
+  color: #494646;
+}
+
+.container .color-controls {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container .color-controls .control {
+  display: grid;
+  grid-template-columns: 30% 50% 20%;
+}
+
+.container .color-controls label {
+  font-size: 1.3rem;
+}
+
+.red-control-label,
+.red-output {
+  color: red;
+}
+
+.red-control {
+  accent-color: red;
+}
+
+.green-control-label,
+.green-output {
+  color: green;
+}
+
+.green-control {
+  accent-color: green;
+}
+
+.blue-control-label,
+.blue-output {
+  color: blue;
+}
+
+.blue-control {
+  accent-color: blue;
+}
+
+.output {
+  font-size: 1.3rem;
+  padding: 1px 6px;
+  text-align: right;
+}
+
+
+@media (min-width: 720px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+ 
+}
+
+@media (min-width: 1080px) {
+  .container {
+    flex-direction: column;
+  }
+  .container .color-controls  {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  
+}
