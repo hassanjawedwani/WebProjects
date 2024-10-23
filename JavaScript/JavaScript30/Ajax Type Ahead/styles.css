@@ -1,3 +1,72 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffc600;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.search-form {
+  max-width: 450px;
+  margin: 50px auto;
+}
+
+
+.search {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 40px;
+  border: 10px solid #f7f7f7;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  outline: 0;
+}
+
+.suggestions { 
+  list-style: none;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.suggestions li {
+  background: linear-gradient(to top, #ffffff 0%, #efefef
+   100%);
+  padding: 15px;
+  border: 1px solid #f7f7f7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.0.14);
+  border-bottom: 1px solid #d8d8d8;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: space-between;
+}
+
+.suggestions li:nth-child(odd) {
+  transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+}
+
+.suggestions li:nth-child(even) {
+  transform: perspective(100px) rotateX(-3deg) translateY(3px);
+  
+}
+
+
+
+
+
+
+
+
+
+
+
 .hl {
   background-color: yellow;
 }

@@ -38,6 +38,6 @@ function displayData() {
   suggestions.innerHTML = htmlString;
 }
 
-const input = document.getElementById("search");
-const suggestions = document.getElementById("suggestions");
+const input = document.querySelector(".search");
+const suggestions = document.querySelector(".suggestions");
 input.addEventListener("keyup", displayData);
