@@ -15,25 +15,26 @@
 
         <div class="control">
           <label for="red" class="red-control-label">Red: </label>
-          <input id="red" type="range" min="0" max="255" class="red-control"/>
-          <div class="output red-output">333</div>
+          <input id="red" value="0" name="red" type="range" min="0" max="255" class="input red-control"/>
+          <div class="output red-output">0</div>
        </div>
 
        <div class="control">
         <label for="green" class="green-control-label">Green: </label>
-        <input id="green" type="range" min="0" max="255" class="control green-control"/>
+        <input id="green" value="0" name="green" type="range" min="0" max="255" class="input green-control"/>
         <div class="output green-output">0</div>
         </div>
 
         <div class="control">
           <label for="blue" class="blue-control-label">Blue: </label>
-          <input id="blue"type="range" min="0" max="255" class="control blue-control"/>
-          <div class="output blue-output">333</div>
+          <input id="blue" value="0" name="bleu" type="range" min="0" max="255" class="input blue-control"/>
+          <div class="output blue-output">0</div>
         </div>
       </div>
 
     </div>
+    <div id="combinated-color"></div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>
