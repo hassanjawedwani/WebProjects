@@ -12,7 +12,7 @@ const Navbar = () => {
           <li><a href="">Contact</a></li>
         </ul>
       </nav>
-      <button className="px-4 py-[6px] font-inter font-semibold text-base text-white bg-customRed">login</button>
+      <button className="red-btn">login</button>
     </header>
   )
 }
