@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   return (
-    <nav className="sticky top-0 z-50 py-3 border-b border-neutral-700/80">
+    <nav className="sticky top-0 z-50 py-3 border-b border-neutral-700/80 backdrop-blur-lg">
       <div className="flex justify-between px-4 text-sm items-center">
         <div className="flex items-center">
           <img src={logo} alt="logo" className="w-10 h-10 mr-1" />

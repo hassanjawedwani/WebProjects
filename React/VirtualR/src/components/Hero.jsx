@@ -11,7 +11,7 @@ const Hero = () => {
           for developers
         </span>
       </h1>
-      <p className="text-lg text-neutral-500 mx-w-4xl text-center mt-10 ">
+      <p className="text-lg text-neutral-500 mx-w-4xl text-center mt-10 text-balance">
         Empower your creativity and bring your VR app ideas to life with our
         intutive development tools. Get started today and turn your imagination
         into immersive reality!
@@ -37,6 +37,7 @@ const Hero = () => {
           Your browser doesn't support the video tag
         </video>
       </div>
+      
     </div>
   );
 };
