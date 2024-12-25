@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <em><h1 onclick="makegreen()">Open Console to check output</h1></em>
+  <script>
+    function makegreen() {
+      const h = document.querySelector("h1");
+      h.style.color = "#bada55";
+      h.style.fontSize = '50px';
+    }
+
+    // regular 
+    console.log("hello world");
+    // interpolated
+    console.log(`hello world this %s`, `👚`);
+    // style
+    console.log(`%c i am great text`, `background-color: blue`);
+    // warning
+    console.warn("ohh noo");
+    //error 
+    console.error("fuck");
+    //info
+    console.info("you are beautiful");
+    //testing
+    const h = document.querySelector("h1");
+    console.assert(h.classList.contains("fuck"), "dont contain fuck class");
+    // clearing
+    console.clear();
+    // viewing DOM element
+    console.log(h);
+    console.dir(h);
+    console.clear();
+
+    //Grouping Together
+    // console.groupCollapsed("fuck1");
+    // console.log("hello world")
+    // console.log("hello world")
+    // console.log("hello world")
+    // console.log("hello world")
+    // console.log("hello world")
+    // console.log("hello world")
+    // console.groupEnd("fuck3");
+    // console.groupCollapsed("fuck2");
+
+    // Counting
+    console.count("wes");
+    console.count("wes");
+    console.count("wes");
+    console.count("wes");
+    console.count("asds"); 
+    console.count("asds"); 
+    console.count("asds"); 
+    console.count("asds"); 
+
+    //table 
+    console.table(["hasds", "asdf"]);
+    console.clear();
+    // time
+    console.time("now time");
+    // setTimeout(() => {
+    //   console.timeEnd("now time");
+    // }, 5000);
+
+    fetch("https://api.github.com/users/wesbos")
+    .then(res => res.json())
+    .then(res => {
+      console.timeEnd("now time");
+console.log(res);
+    })
+
+
+  </script>
+</body>
+</html>
