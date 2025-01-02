@@ -1,0 +1,35 @@
+*, 
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FFC600;
+}
+
+.app {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 400px;
+  margin: 40px auto 40px;
+  padding: 0.6rem;
+}
+
+.task {
+  background-color: blue;
+  display: flex;;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.task input {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.task label {
+  font-size: 1.2rem;
+}
+
