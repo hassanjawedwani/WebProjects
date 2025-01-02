@@ -8,6 +8,7 @@
 
 body {
   background-color: #FFC600;
+  font-family: sans-serif;
 }
 
 .app {
@@ -17,8 +18,12 @@ body {
   padding: 0.6rem;
 }
 
+.app h1 {
+  text-align: center;
+  margin: 0.5rem auto;
+}
+
 .task {
-  background-color: blue;
   display: flex;;
   align-items: center;
   gap: 0.4rem;
