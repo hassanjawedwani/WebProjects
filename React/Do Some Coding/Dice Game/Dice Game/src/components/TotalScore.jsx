@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { MyContext } from "../MyContext";
 
 function TotalScore() {
+  const { totalScore } = useContext(MyContext);
   return (
     <Container>
-        <h1>0</h1>
+        <h1>{totalScore}</h1>
         <p>Total Score</p>
     </Container>
   )

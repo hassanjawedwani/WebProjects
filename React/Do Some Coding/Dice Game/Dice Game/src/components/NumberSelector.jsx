@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components"
+import { MyContext } from "../MyContext";
 
 const NumberSelector = () => {
   const numbers = [1, 2, 3, 4, 5, 6];
-  const [selectedNumber, setSelectedNumber] = useState();
-  console.log(selectedNumber);
+  const { selectedNumber, setSelectedNumber, numberSelectorError, setNumberSelectorError} =  useContext(MyContext);
+ 
+
   return (
     <OuterContainer>
+      <h3 className="error">{numberSelectorError}</h3>
       <InnerContainer>
         {
-          numbers.map((number, index) => <NumberBox key={index} onClick={() => {setSelectedNumber(number)}} isSelected={ number === selectedNumber} >{number}</NumberBox>)
+          numbers.map((number, index) => <NumberBox key={index} onClick={() => { setSelectedNumber(number); setNumberSelectorError("") }} isSelected={number === selectedNumber} >{number}</NumberBox>)
         }
       </InnerContainer>
       <p>Select Number</p>
@@ -26,6 +29,10 @@ const OuterContainer = styled.div`
     font-size: 24px;
     font-weight: bold;
     text-align: end;
+  }
+  h3 {
+    color: red;
+    font-style: italic;
   }
 `;
 
@@ -49,7 +56,7 @@ const NumberBox = styled.div `
       color: white;
       cursor: pointer;
     };
-    background-color: ${(props) => { console.log(props.isSelected); return props.isSelected ? "black" : "white" }};
+    background-color: ${(props) => { return props.isSelected ? "black" : "white" }};
     color: ${({ isSelected }) => isSelected ? "white": "black"};
 `
 
