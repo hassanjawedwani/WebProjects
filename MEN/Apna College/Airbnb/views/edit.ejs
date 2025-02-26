@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Listing</title>
+</head>
+<body>
+  <h1>Edit Listing</h1>
+  <form method="post" action="http://localhost:8080/listings/<%=list._id%>?_method=PUT">
+    <label> Title
+      <input type="text" name="title" value="<%=list.title%>" placeholder="Enter list title" />
+   </label><br />
+   <label> Description
+    <textarea name="description" placeholder="Enter Description"><%=list.description%></textarea>
+   </label><br />
+   <label> Image Filename
+    <input type="text" name="imageFilename" value="<%=list.image.filename%>" placeholder="Enter image Filename" />
+   </label><br />
+   <label> Image URL
+    <input type="url" name="imageUrl" value="<%=list.image.url%>" placeholder="Enter image Url" />
+   </label><br />
+   <label> Price
+    <input type="number" name="price" value="<%=list.price%>" placeholder="Enter Price" />
+   </label><br />
+   <label> Location
+    <input type="text" name="location"  value="<%=list.location%>"placeholder="Enter location" />
+   </label><br />
+   <label> Country
+    <input type="text" name="country" value="<%=list.country%>" placeholder="Enter country" />
+   </label><br />
+   <button type="submit">Update</button>
+  </form>
+</body>
+</html>

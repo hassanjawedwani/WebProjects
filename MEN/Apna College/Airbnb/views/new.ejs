@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>new Listing</title>
+</head>
+<body>
+  <h1>Create a new Listing</h1>
+  <form method="post" action="http://localhost:8080/listings">
+    <label> Title
+      <input type="text" name="title" placeholder="Enter list title" />
+   </label><br />
+   <label> Description
+    <textarea name="description" placeholder="Enter Description"></textarea>
+   </label><br />
+   <label> Image Filename
+    <input type="text" name="imageFilename" placeholder="Enter image Filename" />
+   </label><br />
+   <label> Image URL
+    <input type="url" name="imageUrl" placeholder="Enter image Url" />
+   </label><br />
+   <label> Price
+    <input type="number" name="price" placeholder="Enter Price" />
+   </label><br />
+   <label> Location
+    <input type="text" name="location" placeholder="Enter location" />
+   </label><br />
+   <label> Country
+    <input type="text" name="country" placeholder="Enter country" />
+   </label><br />
+   <button type="submit">Create new list</button>
+  </form>
+</body>
+</html>

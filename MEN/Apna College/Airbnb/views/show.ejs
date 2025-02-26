@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listings</title>
+</head>
+<body>
+  <p><%=list.title%></p>
+  <p><%=list.image.filename%></p>
+  <img src="<%=list.image.url%>" style="width: 300px" />
+  <p><%=list.price.toLocaleString("en-IN")%>  &#8360;</p>
+  <p><%=list.location%></p>
+  <p><%=list.country%></p>
+</body>
+</html>
