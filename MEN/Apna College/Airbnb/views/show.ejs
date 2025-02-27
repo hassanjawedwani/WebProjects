@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listings</title>
-</head>
-<body>
-  <p><%=list.title%></p>
-  <p><%=list.image.filename%></p>
-  <img src="<%=list.image.url%>" style="width: 300px" />
-  <p><%=list.price.toLocaleString("en-IN")%>  &#8360;</p>
-  <p><%=list.location%></p>
-  <p><%=list.country%></p>
-</body>
-</html>
+<% layout("./layout/boilerplate") -%>
+
+<div class="container">
+  <div class="card mx-auto mt-3" style="max-width: 40rem;;">
+    <img
+      src="<%=list.image.url%>"
+      class="card-img-top"
+      alt="<%=list.image.filename%>"
+      style="max-height: 50vh; width: 100%;"
+    />
+    <div class="card-body">
+      <h5 class="card-title"><%=list.title%></h5>
+      <p class="card-text"><%=list.description%></p>
+      <p class="card-text">
+        <%=list.price.toLocaleString("en-IN")%> &#8360;<br />
+        <%=list.location%><br /> <%=list.country%><br />
+      </p>
+
+      <div style="display: flex; gap: 2rem;">
+        <form
+        method="get"
+        action="http://localhost:8080/listings/<%=list._id%>/edit"
+      >
+        <button type="submit" class="btn custom-btn">Edit</button>
+      </form>
+      <form
+        method="post"
+        action="http://localhost:8080/listings/<%=list._id%>?_method=DELETE"
+      >
+        <button type="submit" class="btn custom-btn">Delete Listing</button>
+      </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Listings</title>
-</head>
-<body>
+<!-- 
   <h1>Listings EJS</h1>
-  <form method="get" action="http://localhost:8080/listings/new">
-    <button type="submit">Create a new Listing</button>
-  </form>
   <% for (const list of listings) { %>
     <div style="margin-bottom: 1rem; background-color: lightblue;">
       <p><%=list.title%></p>
+      <p><%=list.description%></p>
       <p><%=list.image.filename%></p>
       <img src="<%=list.image.url%>" style="width: 300px" />
       <% if (list.price) { %>
@@ -30,6 +21,29 @@
         <button type="submit">Delete Listing</button>
       </form>
     </div>
+  <% } %> -->
+
+
+<% layout("./layout/boilerplate") -%>
+<div class="container listings">
+  <% for (const list of listings) { %>
+    <a href="/listings/<%=list._id%>/show" style="text-decoration: none;">
+    <div class="card shadow mb-5" style="width: 18rem">
+      <img src="<%=list.image.url%>" class="card-img-top card-image rounded" alt="<%=list.image.filename%>" />
+      <div class="card-img-overlay">
+
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%=list.title%></h5>
+        <p class="card-text">
+          <% if (list.price) { %>
+            &#8360; <%=list.price.toLocaleString("en-IN")%> /night
+            <% } %><br />
+          <%=list.location%><br />
+          <%=list.country%>
+        </p>
+      </div>
+    </div>
+  </a>
   <% } %>
-</body>
-</html>
+</div>
