@@ -5,6 +5,8 @@
     <form
       method="post"
       action="http://localhost:8080/listings/<%=list._id%>?_method=PUT"
+      class="needs-validation"
+      novalidate
     >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
@@ -15,7 +17,10 @@
           id="title"
           value="<%=list.title%>"
           placeholder="Enter list title"
+          required
         />
+        <div class="valid-feedback">good</div>
+        <div class="invalid-feedback">Please enter a eye catching title</div>
       </div>
 
       <div class="mb-3">
@@ -25,9 +30,12 @@
           class="form-control"
           id="description"
           placeholder="Enter Description"
+          required
         >
 <%=list.description%></textarea
         >
+        <div class="valid-feedback">good</div>
+        <div class="invalid-feedback">Please enter a description that describes your listing</div>
       </div>
 
       <div class="mb-3">
@@ -39,7 +47,10 @@
           id="imageUrl"
           value="<%=list.image.url%>"
           placeholder="Enter image Url"
+          required
         />
+        <div class="valid-feedback">good</div>
+        <div class="invalid-feedback">Please enter a url to an image for listing</div>
       </div>
 
       <div class="mb-3">
@@ -51,7 +62,10 @@
           id="price"
           value="<%=list.price%>"
           placeholder="Enter Price"
+          required
         />
+        <div class="valid-feedback">good</div>
+          <div class="invalid-feedback">Please enter price for your listing</div>
       </div>
 
       <div class="mb-3">
@@ -63,7 +77,10 @@
           id="location"
           value="<%=list.location%>"
           placeholder="Enter location"
+          required
         />
+        <div class="valid-feedback">good</div>
+          <div class="invalid-feedback">Please enter location address</div>
       </div>
 
       <div class="mb-3">
@@ -75,7 +92,10 @@
           id="country"
           value="<%=list.country%>"
           placeholder="Enter country"
+          required
         />
+        <div class="valid-feedback">good</div>
+        <div class="invalid-feedback">Please enter country name</div>
       </div>
 
       <button type="submit" class="btn custom-btn">Update</button>

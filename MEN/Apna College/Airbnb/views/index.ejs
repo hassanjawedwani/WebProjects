@@ -1,29 +1,3 @@
-<!-- 
-  <h1>Listings EJS</h1>
-  <% for (const list of listings) { %>
-    <div style="margin-bottom: 1rem; background-color: lightblue;">
-      <p><%=list.title%></p>
-      <p><%=list.description%></p>
-      <p><%=list.image.filename%></p>
-      <img src="<%=list.image.url%>" style="width: 300px" />
-      <% if (list.price) { %>
-      <p><%=list.price.toLocaleString("en-IN")%> &#8360;</p>
-      <% } %>
-      <p><%=list.location%></p>
-      <p><%=list.country%></p>
-      <form method="get" action="http://localhost:8080/listings/<%=list._id%>/show">
-        <button type="submit">Detail</button>
-      </form>
-      <form method="get" action="http://localhost:8080/listings/<%=list._id%>/edit">
-        <button type="submit">Edit</button>
-      </form>
-      <form method="post" action="http://localhost:8080/listings/<%=list._id%>?_method=DELETE">
-        <button type="submit">Delete Listing</button>
-      </form>
-    </div>
-  <% } %> -->
-
-
 <% layout("./layout/boilerplate") -%>
 <div class="container listings">
   <% for (const list of listings) { %>
