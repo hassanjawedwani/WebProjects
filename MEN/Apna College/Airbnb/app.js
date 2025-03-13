@@ -1,14 +1,11 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const path = require("path");
-const Listing = require("./models/Listing");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./ExpressError");
-const wrapAsync = require("./utils/wrapAsync");
-const { listingSchema, reviewSchema } = require("./schema");
-const Review = require("./models/Review");
-
+const listings = require("./routes/listings");
+const reviews = require("./routes/reviews");
 const app = express();
 const port = 8080;
 
@@ -36,211 +33,32 @@ async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/airbnb");
 }
 
-// Express Start
 
-const validateListing = (req, res, next) => {
-  const result = listingSchema.validate(req.body);
-  // console.log(result.error.details.map(el => el.message).join(", "))
-  if (result.error) {
-    next(new ExpressError(404, result.error));
-  } else {
-    next();
-  }
-};
-
-const validateReview = (req, res, next) => {
-  const result = reviewSchema.validate(req.body.review);
-  if (result.error) {
-    next(new ExpressError(404, result.error));
-  } else {
-    next();
-  }
-}
+// express routes
 
 app.get("/", (req, res) => {
   res.send("Hi i'm root");
 });
 
-app.get(
-  "/listings",
-  wrapAsync(async (req, res) => {
-    const listings = await Listing.find({});
-    res.render("index.ejs", { listings });
-  })
-);
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
 
-app.get(
-  "/listings/:id/show",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const list = await Listing.findById(id).populate("review");
-    res.render("show.ejs", { list });
-  })
-);
-
-app.get("/listings/new", (req, res) => {
-  res.render("new.ejs");
-});
-
-app.post(
-  "/listings",
-  validateListing,
-  wrapAsync(async (req, res, next) => {
-    // if (!req.body.title) {
-    //   next(new ExpressError(400, "Please enter a title"));
-    // }
-    // if (!req.body.description) {
-    //   next(new ExpressError(400, "Please enter a description"));
-    // }
-    // if (!req.body.price) {
-    //   next(new ExpressError(400, "Please enter a price"));
-    // }
-    // if (!req.body.location) {
-    //   next(new ExpressError(400, "Please enter a location"));
-    // }
-    // if (!req.body.country) {
-    //   next(new ExpressError(400, "Please enter a country"));
-    // }
-
-    const {
-      title,
-      description,
-      imageFilename,
-      imageUrl,
-      price,
-      location,
-      country,
-    } = req.body;
-
-    const list = new Listing({
-      title,
-      description,
-      image: {
-        filename: imageFilename,
-        url: imageUrl,
-      },
-      price,
-      location,
-      country,
-    });
-
-    await list.save();
-    res.redirect("/listings");
-  })
-);
-
-app.get(
-  "/listings/:id/edit",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const list = await Listing.findById(id);
-    res.render("edit.ejs", { list });
-  })
-);
-
-app.post(
-  "/listings/:id/reviews",
-  validateReview,
-  wrapAsync(async (req, res) => {
-    let review = new Review(req.body.review);
-    await review.save();
-
-    const list = await Listing.findById(req.params.id);
-    list.review.push(review);
-    await list.save();
-
-    res.redirect(`/listings/${list._id}/show`);
-  })
-);
-
-app.put(
-  "/listings/:id",
-  validateListing,
-  wrapAsync(async (req, res, next) => {
-    const { id } = req.params;
-
-    // console.log(req.body)
-    // if (!req.body.title) {
-    //   next(new ExpressError(400, "Please enter a title"));
-    // }
-    // if (!req.body.description) {
-    //   next(new ExpressError(400, "Please enter a description"));
-    // }
-
-    // if (!req.body.imageUrl) {
-    //   next(new ExpressError(400, "Please enter a image url"));
-    // }
-
-    // if (!req.body.price) {
-    //   next(new ExpressError(400, "Please enter a price"));
-    // }
-    // if (!req.body.location) {
-    //   next(new ExpressError(400, "Please enter a location"));
-    // }
-    // if (!req.body.country) {
-    //   next(new ExpressError(400, "Please enter a country"));
-    // }
-
-    const {
-      title,
-      description,
-      imageFilename,
-      imageUrl,
-      price,
-      location,
-      country,
-    } = req.body;
-
-    await Listing.findByIdAndUpdate(id, {
-      title,
-      description,
-      image: {
-        filename: imageFilename,
-        url: imageUrl,
-      },
-      price,
-      location,
-      country,
-    });
-
-    res.redirect("/listings");
-  })
-);
-
-app.delete(
-  "/listings/:id",
-  wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const list = await Listing.findById(id);
-    await Review.deleteMany({ _id: { $in: list.review } });
-    await Listing.findByIdAndDelete(id);
-    res.redirect("/listings");
-  })
-);
-
-app.delete(
-  "/listings/:id/reviews/:reviewId",
-  wrapAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Listing.findByIdAndUpdate(id, { $pull: { review: reviewId }  });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}/show`);
-  })
-)
-
-// Error Handling Middlewares
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
 });
 
+
+// Error Handling Middlewares
+
 app.use((err, req, res, next) => {
   const { status = 500, message = "Some Error occured " } = err;
+  console.log(err);
   res.status(status).render("error.ejs", { message });
 });
 
 
-
+// express server startup
 
 app.listen(port, () => {
   console.log("Server connection established at port: ", port);
