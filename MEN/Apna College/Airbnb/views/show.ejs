@@ -1,36 +1,86 @@
 <% layout("./layout/boilerplate") -%>
 
 <div class="container">
-  <div class="card mx-auto mt-3" style="max-width: 40rem;;">
+  <div class="card mx-auto my-3" style="max-width: 40rem">
     <img
       src="<%=list.image.url%>"
       class="card-img-top"
       alt="<%=list.image.filename%>"
-      style="max-height: 50vh; width: 100%;"
+      style="max-height: 50vh; width: 100%"
     />
     <div class="card-body">
       <h5 class="card-title"><%=list.title%></h5>
       <p class="card-text"><%=list.description%></p>
       <p class="card-text">
         <%=list.price.toLocaleString("en-IN")%> &#8360;<br />
-        <%=list.location%><br /> <%=list.country%><br />
+        <%=list.location%><br />
+        <%=list.country%><br />
       </p>
 
-      <div style="display: flex; gap: 2rem;">
+      <div style="display: flex; gap: 2rem">
         <form
-        method="get"
-        action="http://localhost:8080/listings/<%=list._id%>/edit"
-      >
-        <button type="submit" class="btn custom-btn">Edit</button>
-      </form>
-      <form
-        method="post"
-        action="http://localhost:8080/listings/<%=list._id%>?_method=DELETE"
-      >
-        <button type="submit" class="btn custom-btn">Delete Listing</button>
-      </form>
+          method="get"
+          action="http://localhost:8080/listings/<%=list._id%>/edit"
+        >
+          <button type="submit" class="btn custom-btn">Edit</button>
+        </form>
+        <form
+          method="post"
+          action="http://localhost:8080/listings/<%=list._id%>?_method=DELETE"
+        >
+          <button type="submit" class="btn custom-btn">Delete Listing</button>
+        </form>
       </div>
-      
+      <hr />
+      <div>
+        <form
+          method="post"
+          action="http://localhost:8080/listings/<%=list._id%>/reviews"
+          class="needs-validation"
+          novalidate
+        >
+          <label for="rating" class="form-label mt-3">Rating</label>
+          <input
+            type="range"
+            id="rating"
+            name="review[rating]"
+            class="form-range mb-3"
+            min="1"
+            max="5"
+          />
+          <div>
+            <label for="comment" class="form-label">Comment</label>
+            <textarea
+              id="comment"
+              rows="4"
+              name="review[comment]"
+              class="form-control mb-3"
+              placeholder="i.e. this place is wonderful"
+              required
+            ></textarea>
+            <div class="valid-feedback">good</div>
+            <div class="invalid-feedback">
+              Please enter your experience before add review
+            </div>
+          </div>
+
+          <button class="btn btn-outline-dark mb-3">Submit</button>
+        </form>
+      </div>
+      <hr />
+      <div class="d-flex flex-wrap gap-2 justify-content-between p-3">
+        <% for(const review of list.review) { %>
+        <div class="card" style="width: 16rem">
+          <div class="card-body">
+            <h5 class="card-title"><%=review.rating%> <stars></stars></h5>
+            <p class="card-text"><%=review.comment%></p>
+            <form method="post" action="http://localhost:8080/listings/<%=list._id%>/reviews/<%=review._id%>?_method=DELETE">
+              <button type="submit" class="btn btn-dark">Delete</button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+      </div>
     </div>
   </div>
 </div>

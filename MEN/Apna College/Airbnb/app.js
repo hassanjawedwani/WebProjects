@@ -6,7 +6,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./ExpressError");
 const wrapAsync = require("./utils/wrapAsync");
-const { listingSchema } = require("./schema");
+const { listingSchema, reviewSchema } = require("./schema");
+const Review = require("./models/Review");
 
 const app = express();
 const port = 8080;
@@ -45,14 +46,20 @@ const validateListing = (req, res, next) => {
   } else {
     next();
   }
+};
+
+const validateReview = (req, res, next) => {
+  const result = reviewSchema.validate(req.body.review);
+  if (result.error) {
+    next(new ExpressError(404, result.error));
+  } else {
+    next();
+  }
 }
 
-app.get(
-  "/",
-  (req, res) => {
-    res.send("Hi i'm root");
-  }
-);
+app.get("/", (req, res) => {
+  res.send("Hi i'm root");
+});
 
 app.get(
   "/listings",
@@ -66,40 +73,35 @@ app.get(
   "/listings/:id/show",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const list = await Listing.findById(id);
+    const list = await Listing.findById(id).populate("review");
     res.render("show.ejs", { list });
   })
 );
 
-app.get(
-  "/listings/new",
-  (req, res) => {
-    res.render("new.ejs");
-  }
-);
+app.get("/listings/new", (req, res) => {
+  res.render("new.ejs");
+});
 
 app.post(
-  "/listings",validateListing,
+  "/listings",
+  validateListing,
   wrapAsync(async (req, res, next) => {
-   
-      // if (!req.body.title) {
-      //   next(new ExpressError(400, "Please enter a title"));
-      // }
-      // if (!req.body.description) {
-      //   next(new ExpressError(400, "Please enter a description"));
-      // }
-      // if (!req.body.price) {
-      //   next(new ExpressError(400, "Please enter a price"));
-      // }
-      // if (!req.body.location) {
-      //   next(new ExpressError(400, "Please enter a location"));
-      // }
-      // if (!req.body.country) {
-      //   next(new ExpressError(400, "Please enter a country"));
-      // }
+    // if (!req.body.title) {
+    //   next(new ExpressError(400, "Please enter a title"));
+    // }
+    // if (!req.body.description) {
+    //   next(new ExpressError(400, "Please enter a description"));
+    // }
+    // if (!req.body.price) {
+    //   next(new ExpressError(400, "Please enter a price"));
+    // }
+    // if (!req.body.location) {
+    //   next(new ExpressError(400, "Please enter a location"));
+    // }
+    // if (!req.body.country) {
+    //   next(new ExpressError(400, "Please enter a country"));
+    // }
 
-    
-    console.log(result);
     const {
       title,
       description,
@@ -122,7 +124,7 @@ app.post(
       country,
     });
 
-    await list.save()
+    await list.save();
     res.redirect("/listings");
   })
 );
@@ -136,9 +138,25 @@ app.get(
   })
 );
 
+app.post(
+  "/listings/:id/reviews",
+  validateReview,
+  wrapAsync(async (req, res) => {
+    let review = new Review(req.body.review);
+    await review.save();
+
+    const list = await Listing.findById(req.params.id);
+    list.review.push(review);
+    await list.save();
+
+    res.redirect(`/listings/${list._id}/show`);
+  })
+);
+
 app.put(
-  "/listings/:id",validateListing,
-  wrapAsync(async(req, res, next) => {
+  "/listings/:id",
+  validateListing,
+  wrapAsync(async (req, res, next) => {
     const { id } = req.params;
 
     // console.log(req.body)
@@ -162,8 +180,6 @@ app.put(
     // if (!req.body.country) {
     //   next(new ExpressError(400, "Please enter a country"));
     // }
-
-   
 
     const {
       title,
@@ -193,13 +209,24 @@ app.put(
 
 app.delete(
   "/listings/:id",
-  wrapAsync(async(req, res) => {
+  wrapAsync(async (req, res) => {
     const { id } = req.params;
+    const list = await Listing.findById(id);
+    await Review.deleteMany({ _id: { $in: list.review } });
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
   })
 );
 
+app.delete(
+  "/listings/:id/reviews/:reviewId",
+  wrapAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Listing.findByIdAndUpdate(id, { $pull: { review: reviewId }  });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}/show`);
+  })
+)
 
 // Error Handling Middlewares
 
@@ -211,6 +238,9 @@ app.use((err, req, res, next) => {
   const { status = 500, message = "Some Error occured " } = err;
   res.status(status).render("error.ejs", { message });
 });
+
+
+
 
 app.listen(port, () => {
   console.log("Server connection established at port: ", port);
