@@ -1,18 +1,23 @@
 <% layout("./layout/boilerplate") -%>
+
+
+
+
 <div class="container listings">
   <% for (const list of listings) { %>
-    <a href="/listings/<%=list._id%>/show" style="text-decoration: none;">
+  <a href="/listings/<%=list._id%>/show" style="text-decoration: none">
     <div class="card shadow mb-5" style="width: 18rem">
-      <img src="<%=list.image.url%>" class="card-img-top card-image rounded" alt="<%=list.image.filename%>" />
-      <div class="card-img-overlay">
-
-      </div>
+      <img
+        src="<%=list.image.url%>"
+        class="card-img-top card-image rounded"
+        alt="<%=list.image.filename%>"
+      />
+      <div class="card-img-overlay"></div>
       <div class="card-body">
         <h5 class="card-title"><%=list.title%></h5>
         <p class="card-text">
-          <% if (list.price) { %>
-            &#8360; <%=list.price.toLocaleString("en-IN")%> /night
-            <% } %><br />
+          <% if (list.price) { %> &#8360;
+          <%=list.price.toLocaleString("en-IN")%> /night <% } %><br />
           <%=list.location%><br />
           <%=list.country%>
         </p>

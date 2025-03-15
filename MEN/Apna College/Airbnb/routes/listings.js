@@ -15,12 +15,14 @@ const validateListing = (req, res, next) => {
   }
 };
 
-
-
 router.get(
   "/",
   wrapAsync(async (req, res) => {
     const listings = await Listing.find({});
+    if (!listings) {
+      req.flash("flashMessage", "Listings doesn't exist");
+      res.redirect("/listings");
+    }
     res.render("index.ejs", { listings });
   })
 );
@@ -30,6 +32,10 @@ router.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const list = await Listing.findById(id).populate("review");
+    if (!list) {
+      req.flash("flashMessage", "List doesn't exist");
+      res.redirect("/listings");
+    }
     res.render("show.ejs", { list });
   })
 );
@@ -42,7 +48,6 @@ router.post(
   "/",
   validateListing,
   wrapAsync(async (req, res, next) => {
-    
     const {
       title,
       description,
@@ -66,6 +71,7 @@ router.post(
     });
 
     await list.save();
+    req.flash("flashMessage", "New Listing created successfully");
     res.redirect("/listings");
   })
 );
@@ -75,10 +81,13 @@ router.get(
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const list = await Listing.findById(id);
+    if (!listings) {
+      req.flash("flashMessage", "Listings doesn't exist");
+      res.redirect("/listings");
+    }
     res.render("edit.ejs", { list });
   })
 );
-
 
 router.put(
   "/:id",
@@ -107,7 +116,7 @@ router.put(
       location,
       country,
     });
-
+    req.flash("flashMessage", "List Updated successfully");
     res.redirect("/listings");
   })
 );
@@ -119,9 +128,9 @@ router.delete(
     const list = await Listing.findById(id);
     await Review.deleteMany({ _id: { $in: list.review } });
     await Listing.findByIdAndDelete(id);
+    req.flash("flashMessage", "Listing deleted successfully");
     res.redirect("/listings");
   })
 );
-
 
 module.exports = router;
