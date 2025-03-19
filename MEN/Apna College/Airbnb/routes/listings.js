@@ -5,16 +5,14 @@ const Listing = require("../models/Listing");
 const ExpressError = require("../ExpressError");
 const Review = require("../models/Review");
 const { listingSchema, reviewSchema } = require("../schema");
+const {
+  isLoggin,
+  setOriginalUrl,
+  isOwner,
+  validateListing,
+} = require("../middleware");
 
-const validateListing = (req, res, next) => {
-  const result = listingSchema.validate(req.body);
-  if (result.error) {
-    next(new ExpressError(404, result.error));
-  } else {
-    next();
-  }
-};
-
+//all listings show route
 router.get(
   "/",
   wrapAsync(async (req, res) => {
@@ -27,11 +25,14 @@ router.get(
   })
 );
 
+// one listing show route
 router.get(
   "/:id/show",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const list = await Listing.findById(id).populate("review");
+    const list = await Listing.findById(id)
+      .populate({ path: "review", populate: { path: "owner", model: "User" } })
+      .populate("owner");
     if (!list) {
       req.flash("flashMessage", "List doesn't exist");
       res.redirect("/listings");
@@ -40,13 +41,16 @@ router.get(
   })
 );
 
-router.get("/new", (req, res) => {
+// create route
+router.get("/new", isLoggin, (req, res) => {
   res.render("new.ejs");
 });
 
+// post route
 router.post(
   "/",
   validateListing,
+  isLoggin,
   wrapAsync(async (req, res, next) => {
     const {
       title,
@@ -68,6 +72,7 @@ router.post(
       price,
       location,
       country,
+      owner: req.user,
     });
 
     await list.save();
@@ -76,12 +81,15 @@ router.post(
   })
 );
 
+// edit route
 router.get(
   "/:id/edit",
+  isLoggin,
+  isOwner,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const list = await Listing.findById(id);
-    if (!listings) {
+    if (!list) {
       req.flash("flashMessage", "Listings doesn't exist");
       res.redirect("/listings");
     }
@@ -89,8 +97,11 @@ router.get(
   })
 );
 
+// update route
 router.put(
   "/:id",
+  isLoggin,
+  isOwner,
   validateListing,
   wrapAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -121,8 +132,11 @@ router.put(
   })
 );
 
+// delete route
 router.delete(
   "/:id",
+  isLoggin,
+  isOwner,
   wrapAsync(async (req, res) => {
     const { id } = req.params;
     const list = await Listing.findById(id);

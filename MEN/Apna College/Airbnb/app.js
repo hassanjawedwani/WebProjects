@@ -75,6 +75,7 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.locals.flashMessage = req.flash("flashMessage");
   res.locals.flashErrorMessage = req.flash("flashErrorMessage");
+  res.locals.user = req.user;
   res.locals.error = req.flash("error");
   next();
 });

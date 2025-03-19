@@ -9,6 +9,7 @@
       style="max-height: 50vh; width: 100%"
     />
     <div class="card-body">
+      <p class="card-text italic">Owned by <%=list.owner.username%></p>
       <h5 class="card-title"><%=list.title%></h5>
       <p class="card-text"><%=list.description%></p>
       <p class="card-text">
@@ -16,7 +17,9 @@
         <%=list.location%><br />
         <%=list.country%><br />
       </p>
-
+      
+      <% if(user && list.owner._id.equals( user._id)) { %>
+        
       <div style="display: flex; gap: 2rem">
         <form
           method="get"
@@ -31,6 +34,10 @@
           <button type="submit" class="btn custom-btn">Delete Listing</button>
         </form>
       </div>
+      
+      
+      <% } %>
+
       <hr />
       <div>
         <form
@@ -72,11 +79,19 @@
         <% for(const review of list.review) { %>
         <div class="card" style="width: 16rem">
           <div class="card-body">
-            <h5 class="card-title"><%=review.rating%> <stars></stars></h5>
+            <h5 class="card-title"><%=review.rating%> stars by <b><%=review.owner.username%></b></h5>
+         
             <p class="card-text"><%=review.comment%></p>
-            <form method="post" action="http://localhost:8080/listings/<%=list._id%>/reviews/<%=review._id%>?_method=DELETE">
+            <% if(user && user._id.equals(review.owner._id)) { %>
+              
+              <form
+              method="post"
+              action="http://localhost:8080/listings/<%=list._id%>/reviews/<%=review._id%>?_method=DELETE"
+            >
               <button type="submit" class="btn btn-dark">Delete</button>
             </form>
+            <% } %>
+            
           </div>
         </div>
         <% } %>
