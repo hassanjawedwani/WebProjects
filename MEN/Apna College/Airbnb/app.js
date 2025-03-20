@@ -13,7 +13,6 @@ const port = 8080;
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/User.js");
-const wrapAsync = require("./utils/wrapAsync");
 const user = require("./routes/user.js");
 
 
@@ -71,7 +70,6 @@ app.get("/", (req, res) => {
   res.send("Hi i'm root");
 });
 
-
 app.use((req, res, next) => {
   res.locals.flashMessage = req.flash("flashMessage");
   res.locals.flashErrorMessage = req.flash("flashErrorMessage");
@@ -82,8 +80,6 @@ app.use((req, res, next) => {
 app.use("/listings", listings);
 app.use("/listings/:id/reviews", reviews);
 app.use("/", user);
-
-
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
