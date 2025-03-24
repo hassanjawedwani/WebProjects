@@ -10,7 +10,7 @@ const app = express();
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
-const port = 8080;
+const port = process.env.PORT = 8080;
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/User.js");
