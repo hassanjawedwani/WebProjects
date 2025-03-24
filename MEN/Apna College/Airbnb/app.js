@@ -8,6 +8,7 @@ const listings = require("./routes/listings");
 const reviews = require("./routes/reviews");
 const app = express();
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const port = 8080;
 const passport = require("passport");
@@ -25,16 +26,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
+const dbURL = process.env.MONGO_CONNECT;
+
+
+
 const sessionOptions = {
-  secret: "mysecretkey",
+  store: MongoStore.create({
+    mongoUrl: dbURL,
+    touchAfter: 24 * 3600,
+    encrypt: {
+      secret: process.env.SESSION_SECRET
+    }
+  }),
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
+    httpOnly: true
   },
 };
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -60,9 +78,12 @@ main()
     console.log("Error Database Connection : ", err);
   });
 
+
+
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/airbnb");
+  await mongoose.connect(dbURL)
 }
+console.log(process.env.MONGO_CONNECT)
 
 // express routes
 
