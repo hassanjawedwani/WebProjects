@@ -20,7 +20,7 @@ const upload = multer({ storage });
 router
   .route("/")
   .get(wrapAsync(index)) // index route
-  .post(isLoggin, upload.single('image'), validateListing, wrapAsync(createListing)); // create listing route
+  .post( isLoggin, upload.single('image'), validateListing, wrapAsync(createListing)); // create listing route
 
 // show listing route
 router.get("/:id/show", wrapAsync(showListing));
@@ -33,7 +33,7 @@ router.get("/:id/edit", isLoggin, isOwner, wrapAsync(editListing));
 
 router
   .route("/:id")
-  .put(isLoggin, isOwner, validateListing, wrapAsync(updateListing)) // update listing route
+  .put(isLoggin, isOwner, upload.single('image'), validateListing, wrapAsync(updateListing)) // update listing route
   .delete(isLoggin, isOwner, wrapAsync(destroyListing)); // destroy listing route
 
 module.exports = router;

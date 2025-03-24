@@ -1,11 +1,13 @@
 <% layout("./layout/boilerplate.ejs") -%>
 <div class="container row">
-  <div class="col-lg-8">
+  <div class="col-lg-8" style="position: relative">
     <h1 class="my-3">Edit Listing</h1>
     <form
+      id="edit-listing-form"
       method="post"
       action="http://localhost:8080/listings/<%=list._id%>?_method=PUT"
       class="needs-validation"
+      enctype="multipart/form-data"
       novalidate
     >
       <div class="mb-3">
@@ -35,22 +37,22 @@
 <%=list.description%></textarea
         >
         <div class="valid-feedback">good</div>
-        <div class="invalid-feedback">Please enter a description that describes your listing</div>
+        <div class="invalid-feedback">
+          Please enter a description that describes your listing
+        </div>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label" for="imageUrl">Image URL</label>
-        <input
-          type="url"
-          name="imageUrl"
-          class="form-control"
-          id="imageUrl"
-          value="<%=list.image.url%>"
-          placeholder="Enter image Url"
-          required
-        />
+      <div>
+        <label  for="listing-image">
+          Previous Listing Image
+        </label><br />
+        <img id="listing-image" src="<%= modifiedImage %>" />
+      </div>
+
+      <div class="my-3">
+        <label class="form-label" for="image">Upload a new listing Image</label>
+        <input type="file" name="image" class="form-control" id="image" />
         <div class="valid-feedback">good</div>
-        <div class="invalid-feedback">Please enter a url to an image for listing</div>
       </div>
 
       <div class="mb-3">
@@ -65,7 +67,7 @@
           required
         />
         <div class="valid-feedback">good</div>
-          <div class="invalid-feedback">Please enter price for your listing</div>
+        <div class="invalid-feedback">Please enter price for your listing</div>
       </div>
 
       <div class="mb-3">
@@ -80,7 +82,7 @@
           required
         />
         <div class="valid-feedback">good</div>
-          <div class="invalid-feedback">Please enter location address</div>
+        <div class="invalid-feedback">Please enter location address</div>
       </div>
 
       <div class="mb-3">
@@ -100,5 +102,15 @@
 
       <button type="submit" class="btn custom-btn">Update</button>
     </form>
+    <div id="edit-listing-loader" style="display: none" class="loader">
+      <h2>Please wait ...</h2>
+    </div>
   </div>
+  <script>
+    document
+      .getElementById("edit-listing-form")
+      .addEventListener("submit", function () {
+        document.getElementById("edit-listing-loader").style.display = "flex";
+      });
+  </script>
 </div>

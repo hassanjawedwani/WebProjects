@@ -68,7 +68,9 @@ module.exports.editListing = async (req, res) => {
     req.flash("flashMessage", "Listings doesn't exist");
     res.redirect("/listings");
   }
-  res.render("edit.ejs", { list });
+  let originalImageUrl = list.image.url;
+  let modifiedImage = originalImageUrl.replace("/upload", "/upload/w_250,h_300");
+  res.render("edit.ejs", { list, modifiedImage });
 }
 
 // update listing
@@ -78,24 +80,34 @@ module.exports.updateListing = async (req, res, next) => {
   const {
     title,
     description,
-    imageFilename,
-    imageUrl,
     price,
     location,
     country,
   } = req.body;
 
-  await Listing.findByIdAndUpdate(id, {
-    title,
-    description,
-    image: {
-      filename: imageFilename,
-      url: imageUrl,
-    },
-    price,
-    location,
-    country,
-  });
+  if (req.file) {
+    await Listing.findByIdAndUpdate(id, {
+      title,
+      description,
+      image: {
+        filename: req.file.filename,
+        url: req.file.path,
+      },
+      price,
+      location,
+      country,
+    });
+  } else {
+    
+    await Listing.findByIdAndUpdate(id, {
+      title,
+      description,
+      price,
+      location,
+      country,
+    });
+  }
+
   req.flash("flashMessage", "List Updated successfully");
   res.redirect("/listings");
 }

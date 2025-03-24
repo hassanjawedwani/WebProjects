@@ -66,9 +66,9 @@ async function main() {
 
 // express routes
 
-app.get("/", (req, res) => {
-  res.send("Hi i'm root");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hi i'm root");
+// });
 
 app.use((req, res, next) => {
   res.locals.flashMessage = req.flash("flashMessage");
