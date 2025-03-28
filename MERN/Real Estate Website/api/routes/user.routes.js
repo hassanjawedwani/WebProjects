@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import loginForm from "../controllers/user.controllers.js";
+import signupForm from '../controllers/user.controllers.js';
 
 router
-  .route("/login")
-  .get(loginForm);
+  .route("/signup")
+  .get(signupForm);
 
 export default router;
