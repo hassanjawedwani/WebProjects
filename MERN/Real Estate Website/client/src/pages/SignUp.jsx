@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import ExpressError from "../../../api/utils/ExpressError";
 import Oauth from "../components/Oauth";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFailure, loginStart, loginSuccess } from "../redux/user/userSlice";
 
 export default function SignUp() {
   const [newUserData, setNewUserData] = useState({
@@ -12,13 +12,15 @@ export default function SignUp() {
     password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   function inputHandler(e) {
-    setNewUserData((prevData) => ({
+    setNewUserData(prevData => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
@@ -26,14 +28,13 @@ export default function SignUp() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    dispatch(setIsLoading(true));
+    dispatch(loginStart());
     try {
       if (
         !newUserData.username ||
         !newUserData.email ||
         !newUserData.password
       ) {
-        dispatch(setIsLoading(false));
         throw new Error("All fields are required");
       }
       const response = await fetch("/api/auth/signup", {
@@ -43,20 +44,22 @@ export default function SignUp() {
         },
         body: JSON.stringify(newUserData),
       });
+      const result = await response.json();
 
-      if (response.ok) {
-        const result = await response.json();
+      console.log("res2",result);
+      console.log("res", result);
+      
+
+      if (result.ok) {
         dispatch(loginSuccess(result));
         navigate("/");
       } else {
-        const error = await response.json();
-        dispatch(setErrorMessage(error.message));
-        console.log(error.message);
+        throw new Error(result.message);
       }
-      dispatch(setIsLoading(false));
+    
+
     } catch (err) {
-      dispatch(setErrorMessage(err.message));
-      dispatch(setIsLoading(false));
+      dispatch(loginFailure(err));
       return;
     }
   }
@@ -78,6 +81,7 @@ export default function SignUp() {
           className="border rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl p-3 bg-white"
           value={newUserData.username}
           onChange={inputHandler}
+          required
         />
         <input
           type="email"
@@ -87,6 +91,7 @@ export default function SignUp() {
           className="border rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl  p-3 bg-white"
           value={newUserData.email}
           onChange={inputHandler}
+          required
         />
         <input
           type="password"
@@ -96,13 +101,21 @@ export default function SignUp() {
           className="border rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl p-3 bg-white"
           value={newUserData.password}
           onChange={inputHandler}
+          required
         />
+
+        {/* <input
+          type="file"
+          name="profile-photo"
+          id="profile-photo"
+          // className=" rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl p-3 bg-white"
+        /> */}
+
         <button
-          disabled={isLoading}
           type="submit"
           className="bg-slate-700 text-white rounded-md  w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl tracking-wide shadow-md cursor-pointer"
         >
-          {isLoading ? "Loading..." : "SignUp"}
+          {user.loading ? "Loading..." : "SignUp"}
         </button>
         <Oauth />
         <p className=" text-center sm:text-lg">
@@ -112,7 +125,8 @@ export default function SignUp() {
           </Link>
         </p>
       </form>
-      <div>{errorMessage}</div>
-    </div>
+      <div>{user.error && user.error.message}</div>
+      
+    </div>    
   );
 }

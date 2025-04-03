@@ -6,7 +6,7 @@ import authRouter from './routes/auth.routes.js';
 import ExpressError from './utils/ExpressError.js';
 const app = express();
 const port = 8080;
-
+import cookieParser from 'cookie-parser';
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
@@ -19,13 +19,15 @@ main().then(() => {
 });
 
 app.use(express.json());
+app.use(cookieParser())
 
 app.use("/api/user", userRouter);
 app.use("/api/auth/", authRouter)
 
 app.use((err, req, res, next) => {
-  const errStatus = err.status || 500;
-  const errMessage = err.message || "Internal Server Error";
+  console.log("error handling middleware: ", err);
+  const errStatus = err.status || 499;
+  const errMessage = err.message || err.errmsg || "Internal Server Error";
   res.status(errStatus).json({
     ok: false,
     status: errStatus,

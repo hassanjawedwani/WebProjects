@@ -11,10 +11,14 @@ import {
 import Oauth from "../components/Oauth";
 
 export default function Login() {
+
+
   const [userData, setUserData] = useState({
     email: "",
     password: ""
   });
+
+  
   const { loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +32,7 @@ export default function Login() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    dispatch(loginStart());
+    // dispatch(loginStart());
     try {
       let response = await fetch("/api/auth/login", {
         method: "POST",
@@ -71,6 +75,7 @@ export default function Login() {
           className="border rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl  p-3 bg-white"
           value={userData.email}
           onChange={changeHandler}
+          required
         />
         <input
           type="password"
@@ -80,6 +85,7 @@ export default function Login() {
           className="border rounded-md w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl p-3 bg-white"
           value={userData.password}
           onChange={changeHandler}
+          required
         />
         <button
           disabled={loading}
@@ -96,7 +102,7 @@ export default function Login() {
           </Link>
         </p>
       </form>
-      <div>{error && <p className="text-red-600">{error}</p>}</div>
+      {error && <div className="text-red-600">{error.message}</div>}
     </div>
   );
 }

@@ -7,7 +7,8 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
 export const signup = async (req, res) => {
-  const { username, email, password ,photoURL} = req.body;
+  console.log("signup route");
+  const { username, email, password, photoURL=""} = req.body;
   const hash = bcrypt.hashSync(password, 10);
   const user = new User({
     username,
@@ -16,6 +17,7 @@ export const signup = async (req, res) => {
     photoURL
   });
   const response = await user.save();
+  console.log("signup route, new saved user mongodb user ", response);
   res.status(201).json(response);
 };
 
@@ -45,7 +47,7 @@ export const login = async (req, res, next) => {
 };
 
 export const google = async (req, res) => {
-  console.log("congratulation i am finally in google controller");
+  console.log("congratulation i am finally in google routes");
   const { displayName, email, photoURL } = req.body;
   const username = email.split("@")[0];
   const password = uuidv4();
@@ -61,6 +63,7 @@ export const google = async (req, res) => {
       },
       body: JSON.stringify({ username, email, password , photoURL}),
     });
+    const result = response.json();
     if (response.ok) {
       let response = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -69,17 +72,15 @@ export const google = async (req, res) => {
         },
         body: JSON.stringify({ email, password }),
       });
+      const result = await response.json();
       if (response.ok) {
-        const result = await response.json();
         res.json(result);
       } else {
-        const error = await response.json();
-        console.log("error Occured: ", error.message);
+        console.log("google route, signup done, login route error: ", result.message);
         return;
       }
     } else {
-      const error = await response.json();
-      console.log("Error Occured", error.message);
+      console.log("Error Occured", result.message);
     }
   } else {
     const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
@@ -95,3 +96,5 @@ export const google = async (req, res) => {
       console.log(restUser);
   }
 };
+
+

@@ -6,9 +6,9 @@ export default function Home() {
 
   return (
     <div>Home 
-      <h1>{currentUser._id && currentUser._id}</h1>
-      <h1>{currentUser.email && currentUser.email}</h1>
-      <h1>{currentUser.username && currentUser.username}</h1>
+      <h1>{currentUser && currentUser._id}</h1>
+      <h1>{currentUser && currentUser.email}</h1>
+      <h1>{currentUser && currentUser.username}</h1>
     </div>
   )
 }
