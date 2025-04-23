@@ -8,13 +8,13 @@ import axios from "axios";
 
 export const signup = async (req, res) => {
   console.log("signup route");
-  const { username, email, password, photoURL=""} = req.body;
+  const { username, email, password, photoURL = "" } = req.body;
   const hash = bcrypt.hashSync(password, 10);
   const user = new User({
     username,
     email,
     password: hash,
-    photoURL
+    photoURL,
   });
   const response = await user.save();
   console.log("signup route, new saved user mongodb user ", response);
@@ -22,6 +22,7 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res, next) => {
+  console.log("login route");
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
@@ -31,13 +32,16 @@ export const login = async (req, res, next) => {
     if (!isAuthenitcatedUser) {
       return next(new ExpressError(401, "Credentials aren't corrent"));
     } else {
+      console.log(
+        "login route, token place, token secret: ",
+        process.env.JWT_SECRET
+      );
       const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
+      console.log("login route, token place , here is token", token);
       const { password, ...restUser } = user._doc;
       res
         .cookie("token", token, {
           httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          sameSite: "strict",
         })
         .status(201)
         .json(restUser);
@@ -61,7 +65,8 @@ export const google = async (req, res) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, email, password , photoURL}),
+      credentials: "include", // VERY IMPORTANT!
+      body: JSON.stringify({ username, email, password, photoURL }),
     });
     const result = response.json();
     if (response.ok) {
@@ -70,13 +75,24 @@ export const google = async (req, res) => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // VERY IMPORTANT!
         body: JSON.stringify({ email, password }),
       });
       const result = await response.json();
       if (response.ok) {
-        res.json(result);
+        console.log(result);
+        const token = JWT.sign({ id: result._id }, process.env.JWT_SECRET);
+        res
+          .cookie("token", token, {
+            httpOnly: true,
+          })
+          .status(201)
+          .json(result);
       } else {
-        console.log("google route, signup done, login route error: ", result.message);
+        console.log(
+          "google route, signup done, login route error: ",
+          result.message
+        );
         return;
       }
     } else {
@@ -84,17 +100,23 @@ export const google = async (req, res) => {
     }
   } else {
     const token = JWT.sign({ id: user._id }, process.env.JWT_SECRET);
-      const { password, ...restUser } = user._doc;
-      res
-        .cookie("token", token, {
-          httpOnly: true,
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-          sameSite: "strict",
-        })
-        .status(201)
-        .json(restUser);
-      console.log(restUser);
+    const { password, ...restUser } = user._doc;
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        sameSite: "strict",
+      })
+      .status(201)
+      .json(restUser);
+    console.log(restUser);
   }
 };
 
-
+export const logout = (req, res, next) => {
+  const { id } = req.params;
+  if (id !== req.user.id) {
+    return next(new ExpressError(401, "only login user can logout himself"));
+  }
+  res.clearCookie("token").json("congratulation user logout successfully");
+};

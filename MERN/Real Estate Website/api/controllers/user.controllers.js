@@ -60,7 +60,11 @@ export const profileInfo = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
   console.log("delete user route");
+  console.log(req.user.id, req.params.id)
   const { id } = req.params;
+  if (id !== req.user.id) {
+    return (next(new ExpressError(401, "You can only delete your own account")));
+  }
   console.log("delete user route, user id: ", id);
   const deletedUser = await User.findByIdAndDelete(id);
   console.log("delete route, deltedUser is eithor null || object", deletedUser)
@@ -69,9 +73,7 @@ export const deleteUser = async (req, res, next) => {
     return next(new ExpressError(404, "User not found"));
   } else {
     console.log("location: delete user route,message: this user deleted in database", deletedUser);
+    res.clearCookie()
     res.json("user deleted successfully");
-    // const { password, ...rest } = deletedUser._doc;
-    // console.log("location: delete user route, message: Rest object is ", rest);
-    // res.json(rest);
   }
 }

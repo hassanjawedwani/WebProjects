@@ -3,10 +3,12 @@ import mongoose from 'mongoose';
 import 'dotenv/config'
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
+import listingRouter from './routes/listing.routes.js';
 import ExpressError from './utils/ExpressError.js';
 const app = express();
 const port = 8080;
 import cookieParser from 'cookie-parser';
+
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL);
@@ -23,6 +25,7 @@ app.use(cookieParser())
 
 app.use("/api/user", userRouter);
 app.use("/api/auth/", authRouter)
+app.use("/listings", listingRouter);
 
 app.use((err, req, res, next) => {
   console.log("error handling middleware: ", err);
