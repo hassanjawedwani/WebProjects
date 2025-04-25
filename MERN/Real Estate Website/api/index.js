@@ -8,6 +8,12 @@ import ExpressError from './utils/ExpressError.js';
 const app = express();
 const port = 8080;
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+
+app.use(cors({
+  origin: "http://localhost:5173", // 👈 must match your frontend origin
+  credentials: true,               // 👈 allow sending cookies
+}));
 
 
 async function main() {

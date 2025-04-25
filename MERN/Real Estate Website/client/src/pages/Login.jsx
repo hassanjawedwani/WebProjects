@@ -34,11 +34,12 @@ export default function Login() {
     e.preventDefault();
     // dispatch(loginStart());
     try {
-      let response = await fetch("/api/auth/login", {
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
       });
 

@@ -17,12 +17,13 @@ export default function Oauth() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        const response = await fetch("/api/auth/google", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(result.user)
+          body: JSON.stringify(result.user),
         });
         if (response.ok) {
           console.log("im back from server with this response of new user fucking created");

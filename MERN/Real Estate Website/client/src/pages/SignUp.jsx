@@ -37,7 +37,7 @@ export default function SignUp() {
       ) {
         throw new Error("All fields are required");
       }
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

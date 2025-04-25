@@ -19,6 +19,6 @@ const upload = multer({ storage: storage });
 
 
 router.route("/new")
-.post(verifyToken, upload.array("images", 2), createListing);
+.post(verifyToken, upload.array("images", 5), createListing);
 
 export default router;

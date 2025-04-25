@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoIosWarning } from "react-icons/io";
 import { FaRegImage } from "react-icons/fa6";
 import { CloudinaryImage } from "@cloudinary/url-gen/index";
-import { loginStart, loginSuccess, uploadImageStart, uploadImageEnd, loginFailure, deleteAccountStart, deleteAccountError, deleteAccountSuccess} from "../redux/user/userSlice";
+import { loginStart, loginSuccess, uploadImageStart, uploadImageEnd, loginFailure, deleteAccountStart, deleteAccountError, deleteAccountSuccess, logoutError, logoutSuccess, logoutStart} from "../redux/user/userSlice";
 import { useNavigate } from "react-router";
 
 export default function Profile() {
@@ -100,7 +100,7 @@ export default function Profile() {
   }
 
   async function deleteHandler() {
-    // ! dispatch(deleteAccountStart()); 
+    ! dispatch(deleteAccountStart()); 
     try {
       const response = await fetch(`/api/user/delete/${currentUser._id}`, {
       // const response = await fetch(`/api/user/delete/67eeedc59ea59d4226313f48`, {  // wrong user for testing
@@ -112,11 +112,7 @@ export default function Profile() {
       const result = await response.json();
       if (response.ok) {
         console.log("response from delete route :", result);
-        dispatch(deleteAccountSuccess());
-
-        
-
-        navigate("/");
+        dispatch(deleteAccountSuccess()); 
       } else {
         throw new Error(result.message || "failed to delete user");
       }
@@ -126,6 +122,26 @@ export default function Profile() {
     }
     
 
+  }
+
+  async function logoutHandler() {
+    dispatch(logoutStart());
+    try {
+      const response = await fetch(`api/auth/logout/${currentUser._id}`, {
+        method: "POST"
+      });
+      const result = response.json();
+      if (response.ok) {
+        console.log("successfully logout");
+        dispatch(logoutSuccess());
+        
+      } else {
+        throw new Error(result.message);
+      }
+    } catch (error) {
+      console.log("logoutHandler error occured: ", error);
+      dispatch(logoutError(error));
+    }
   }
 
   return (
@@ -219,8 +235,9 @@ export default function Profile() {
         </button>
        
         <button
-          // type="submit"
+          type="button"
           className="bg-red-700 text-white rounded-md  w-96 sm:w-lg h-10 sm:h-12 text-lg sm:text-2xl tracking-wide shadow-md cursor-pointer hover:opacity-85"
+          onClick={logoutHandler}
         >
          
           {currentUser && user.loading ? (

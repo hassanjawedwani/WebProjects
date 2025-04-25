@@ -7,6 +7,7 @@ import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
 import Header from "./components/Header";
 import PrivateRoute from "./components/PrivateRoute";
+import NewListing from "./pages/listings/NewListing";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
+        <Route path="/listings/new" element={<NewListing />} />
       </Routes>
     </BrowserRouter>
   );

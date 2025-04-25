@@ -85,6 +85,7 @@ export const google = async (req, res) => {
         res
           .cookie("token", token, {
             httpOnly: true,
+            
           })
           .status(201)
           .json(result);

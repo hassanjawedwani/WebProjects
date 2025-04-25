@@ -33,6 +33,8 @@ export const createListing = async (req, res) => {
     user.posts.push(newList._id);
     await user.save();
     console.log(user);
+    return res.status(201).json({ success: true, message: "new post created" });
+
 
   } catch (err) {
     console.log(err);
