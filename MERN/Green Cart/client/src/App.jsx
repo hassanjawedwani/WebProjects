@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import { Routes, Route, useLocation } from "react-router";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+  const isSellerPath = useLocation().pathname.includes("seller");
+  return (  
+    <div>
+      {isSellerPath ? null : <Navbar />}
+      <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40     "}`}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
 
-export default App
+export default App;
