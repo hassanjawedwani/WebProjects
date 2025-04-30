@@ -6,8 +6,8 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, navigate } = useAppContext();
-  console.log(user)
+  const { user, setUser, navigate, setShowLoginForm} = useAppContext();
+
   return (
     <nav className="flex justify-between items-center px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-4 border-b border-gray-300 bg-white relative transition-all">
       
@@ -31,7 +31,7 @@ const Navbar = () => {
           <button className="absolute -top-2.5 -right-3 text-xs w-5 h-5 bg-primary/80 rounded-full ">3</button>
         </div>
 
-        {!user ? (<button className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull text-white rounded-full transition">
+        {!user ? (<button type="button" onClick={() => setShowLoginForm(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull text-white rounded-full transition">
           Login
         </button>) : (
             <div className="relative group">
