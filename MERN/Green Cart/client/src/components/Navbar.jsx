@@ -6,7 +6,7 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, navigate, setShowLoginForm} = useAppContext();
+  const { user, setUser, navigate, setShowLoginForm, setSearchQuery} = useAppContext();
 
   return (
     <nav className="flex justify-between items-center px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -23,7 +23,7 @@ const Navbar = () => {
       <NavLink to="/contact" className={({ isActive }) => isActive ? "text-primary-dull font-semibold" : ""}>Contact</NavLink>
 
         <div className="hidden lg:flex text-sm gap-2 border border-gray-300 px-3 rounded-full items-center">
-          <input type="text" placeholder="Search any Product" className=" py-1.5 w-full bg-transparent outline-none placeholder-gray-400" />
+          <input type="text" onChange={(e) => { setSearchQuery(e.target.value); navigate("/products") }} placeholder="Search any Product" className=" py-1.5 w-full bg-transparent outline-none placeholder-gray-400" />
           <Search className="text-gray-500 w-4 h-4"/>
         </div>
         <div className="relative" onClick={() => navigate("/cart")}>

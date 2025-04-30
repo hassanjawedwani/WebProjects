@@ -233,7 +233,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: false,
+    inStock: true,
   },
   {
     _id: "gd48g45h",
@@ -467,7 +467,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "ek62j23k",
@@ -483,7 +483,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "ek63j34k",
@@ -499,7 +499,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "ek64j45k",
@@ -515,7 +515,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "ek65j56k",
@@ -531,7 +531,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
 
   // Grains

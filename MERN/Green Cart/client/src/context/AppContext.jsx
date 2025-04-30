@@ -13,6 +13,7 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);  // context api for showing product
   const [cartItems, setCartItems] = useState({}); // context api for cart items 
   const [showLoginForm, setShowLoginForm] = useState(false); 
+  const [searchQuery, setSearchQuery] = useState("");
 
 
 
@@ -53,7 +54,7 @@ export const AppContextProvider = ({ children }) => {
     fetchProducts();
   }, []);
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm };
+  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
