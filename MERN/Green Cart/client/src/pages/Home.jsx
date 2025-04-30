@@ -3,6 +3,7 @@ import MainBanner from '../components/MainBanner'
 import Categories from '../components/Categories'
 import Spacer from '../components/Spacer'
 import BestSeller from '../components/BestSeller'
+import BottomBanner from '../components/BottomBanner'
 
 const Home = () => {
   return (
@@ -13,7 +14,8 @@ const Home = () => {
       <Spacer />
       <BestSeller />
       <Spacer />
-
+      <BottomBanner />
+      <Spacer />
     </div>
   )
 }
