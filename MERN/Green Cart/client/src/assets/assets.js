@@ -233,7 +233,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "gd48g45h",
