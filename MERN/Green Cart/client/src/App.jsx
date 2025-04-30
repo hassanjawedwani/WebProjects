@@ -12,9 +12,9 @@ const App = () => {
       {isSellerPath ? null : <Navbar />}
       <Toaster />
       <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40     "} flex-1`}>
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
-        </Routes> */}
+        </Routes>
       </div>
       {isSellerPath ? null : <Footer />}
     </div>
