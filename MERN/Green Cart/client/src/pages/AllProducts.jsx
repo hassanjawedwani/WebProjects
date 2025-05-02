@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppContext';
 
 
 const AllProducts = () => {
-  const { products, currency, addToCart, cartItems, removeToCart, searchQuery } = useAppContext();
+  const { products, currency, addToCart, cartItems, removeToCart, searchQuery, navigate } = useAppContext();
   let allProducts;
   if (searchQuery.length > 0) {
     allProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()) && product.inStock);
@@ -20,7 +20,7 @@ const AllProducts = () => {
           ? (
           allProducts.map((product, index) => (
             <div key={index} className='group rounded-lg flex flex-col justify-center p-4 border border-gray-200 gap-0.5'>
-              <img src={product.image[0]} alt={product.name} className='w-24 h-24 transition-transform group-hover:scale-125 self-center' />
+              <img src={product.image[0]} alt={product.name} className='w-24 h-24 transition-transform group-hover:scale-125 self-center' onClick={() => navigate(`/products/${product.category}/${product._id}`)}/>
               <p className='text-sm text-slate-400'>{product.category}</p>
               <h3 className='text-lg my-1 font-medium text-slate-700'>{product.name}</h3>
               <div className='flex gap-0.5'>
