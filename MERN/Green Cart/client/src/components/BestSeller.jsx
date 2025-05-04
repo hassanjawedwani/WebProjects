@@ -7,7 +7,7 @@ import { useAppContext } from '../context/AppContext';
 
 const BestSeller = () => {
   const context = useAppContext();
-  console.log(context)
+ 
 
   const { products, currency, addToCart, cartItems, removeToCart, navigate} = useAppContext();
  

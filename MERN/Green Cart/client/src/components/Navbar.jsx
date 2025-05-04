@@ -6,10 +6,10 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, navigate, setShowLoginForm, setSearchQuery} = useAppContext();
+  const { user, setUser, navigate, setShowLoginForm, setSearchQuery, cartCount} = useAppContext();
 
   return (
-    <nav className="flex justify-between items-center px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-4 border-b border-gray-300 bg-white relative transition-all">
+    <nav className="flex justify-between items-center px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-4 border-b border-gray-300 bg-white  transition-all sticky top-0 z-20">
       
       {/*Company Logo*/}
       <NavLink to="/" onClick={() => setOpen(false)}>
@@ -26,9 +26,10 @@ const Navbar = () => {
           <input type="text" onChange={(e) => { setSearchQuery(e.target.value); navigate("/products") }} placeholder="Search any Product" className=" py-1.5 w-full bg-transparent outline-none placeholder-gray-400" />
           <Search className="text-gray-500 w-4 h-4"/>
         </div>
+
         <div className="relative" onClick={() => navigate("/cart")}>
           <ShoppingCart className="cursor-pointer w-5 h-5" />
-          <button className="absolute -top-2.5 -right-3 text-xs w-5 h-5 bg-primary/80 rounded-full ">3</button>
+          <button className="absolute -top-2.5 -right-3 text-xs w-5 h-5 bg-primary/80 rounded-full ">{cartCount()}</button>
         </div>
 
         {!user ? (<button type="button" onClick={() => setShowLoginForm(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull text-white rounded-full transition">
@@ -47,10 +48,17 @@ const Navbar = () => {
       </div>
 
       {/*Breadcrumbs Button*/}
-      <button onClick={() => open ? setOpen(false) : setOpen(true)} className="sm:hidden" aria-label="menu">
+      <div  className="sm:hidden flex gap-5">
+        <div className="relative" onClick={() => navigate("/cart")}>
+          <ShoppingCart className="cursor-pointer w-5 h-5" />
+          <button className="absolute -top-2.5 -right-3 text-xs w-5 h-5 bg-primary/80 rounded-full ">{cartCount()}</button>
+        </div>
+        <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="menu">
         {/*Menu Icon SVG */}
         <AlignJustify />
       </button>
+      </div>
+     
 
       {/*Mobile Menu*/}
       <div className={`${open ? "flex" : "hidden"} flex-col absolute top-[60px] left-0 w-full bg-white shadow-md py-4 px-5 gap-2 sm:hidden text-sm items-start`}>
