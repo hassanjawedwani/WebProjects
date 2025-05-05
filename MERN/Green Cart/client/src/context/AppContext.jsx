@@ -14,7 +14,7 @@ export const AppContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState({}); // context api for cart items 
   const [showLoginForm, setShowLoginForm] = useState(false); 
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [allAddresses, setAllAddresses] = useState([]);
 
 
   // Fetch all Products
@@ -62,7 +62,32 @@ export const AppContextProvider = ({ children }) => {
     toast.success("Item deleted from cart");
   }
 
+  const getProductPrice = (productId) => {
+    const product = products.find(product => product._id === productId);
+    if (product) {
+      return product?.price;
+    }
+  }
 
+  const cartTotal = () => {
+    console.log(cartItems);
+    let cartTotal = 0
+    for (const cartProductId in cartItems) {
+      const cartProductPrice = getProductPrice(cartProductId);
+      const quantity = cartItems[cartProductId];
+      cartTotal += (cartProductPrice * quantity);
+    }
+    return cartTotal;
+  }
+
+
+  const getTaxOnCartItems = () => {
+    return cartTotal() * 0.02;
+  }
+
+  const getCartTotalAfterTax = () => {
+    return cartTotal() + getTaxOnCartItems();
+  }
 
 
 
@@ -70,7 +95,7 @@ export const AppContextProvider = ({ children }) => {
     fetchProducts();
   }, [cartItems]);
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart };
+  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart, cartTotal, getTaxOnCartItems , getCartTotalAfterTax, allAddresses, setAllAddresses};
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

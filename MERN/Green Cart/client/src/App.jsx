@@ -10,6 +10,7 @@ import AllProducts from "./pages/AllProducts.jsx";
 import ProductsCategory from "./pages/ProductsCategory.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import AddAddress from "./pages/AddAddress.jsx";
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/products/:category" element={<ProductsCategory />} />
           <Route path="/products/:category/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/add-address" element={<AddAddress />} />
         </Routes>
       </div>
       {isSellerPath ? null : <Footer />}
