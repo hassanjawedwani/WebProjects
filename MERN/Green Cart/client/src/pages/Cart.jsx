@@ -1,15 +1,78 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../context/AppContext'
-import { assets } from '../assets/assets';
+import { assets, categories } from '../assets/assets';
 import { Link } from 'react-router';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
-  const { cartCount, cartItems, setCartItems, products, currency, deleteToCart, cartTotal, getTaxOnCartItems, getCartTotalAfterTax, allAddresses} = useAppContext();
+  const { cartCount, cartItems, setCartItems, products, currency, deleteToCart, cartTotal, getTaxOnCartItems, getCartTotalAfterTax, allAddresses, navigate, myOrders, setMyOrders} = useAppContext();
   const cartProducts = products.filter(product => cartItems[product._id]);
   const [checkoutOption, setCheckoutOption] = useState("cod");
   const [showAddresses, setShowAddresses] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(allAddresses[0] || "");
 
+  const codHandler = () => {
+    console.log("cod handler")
+
+    if (!currentAddress) {
+      toast.error("Please enter address before placing order");
+      return;
+    }
+    if (!Object.keys(cartItems).length) {
+      toast.error("please cart any items before placing orders");
+      return;
+    }
+
+    // cons/ole.log(cartProducts)
+    // console.log();
+
+    setMyOrders(prevOrders => ([
+      ...prevOrders,
+      {
+        orderId: Math.floor(Math.random() * 10000000000000),
+        paymentMethod: checkoutOption,
+        totalAmount: getCartTotalAfterTax(),
+        items: cartProducts.map(cartProduct => {
+          return {
+            image: cartProduct.image,
+            title: cartProduct.name,
+            category: cartProduct.category,
+            quantity: cartItems[cartProduct._id],
+            status: "order placed",
+            date: new Date().toLocaleDateString(),
+            amount: cartProduct.price * cartItems[cartProduct._id]
+          }
+        })
+      }
+    ]));
+
+
+
+    // for (const cartProductId in cartItems) {
+    //   const cartProductQuantity = cartItems[cartProductId];
+    //   const cartProduct = products.find(product => product._id === cartProductId);
+    //   setCartProducts(prevCartProducts => ([
+    //     ...prevCartProducts,
+    //     {
+    //       product: cartProduct,
+    //       quantity: cartProductQuantity
+    //     }
+    //   ]));
+    // }
+    
+    // setMyOrders(prevOrders => {
+    //   return [
+    //     ...prevOrders,
+    //     {
+         
+    //     }
+    //   ]
+    // })
+
+
+      toast.success("Order placed Successfully, check details in my orders pages")
+      navigate("my-orders");
+  }
   
   
   return (
@@ -18,7 +81,7 @@ const Cart = () => {
         <h1 className='text-slate-800 text-3xl font-medium'>Shopping Cart</h1>
         <span className='text-sm text-primary-dull font-medium'>{cartCount()} items</span>
       </div>
-      <div className='grid grid-cols-2'>
+      <div className='grid grid-cols-1 sm:grid-cols-2'>
         <div>
           <div className='grid grid-cols-[2fr_1fr_1fr] text-slate-500 font-medium mt-4'>
             <p>Product Details</p>
@@ -103,7 +166,11 @@ const Cart = () => {
                 <span className='text-gray-500'>Total Amount:</span>
                 <span className='text-primary-dull'>{currency}{getCartTotalAfterTax()}</span>
               </p>
-              {checkoutOption === "cod" ? (<button type="button" className='w-full h-11 bg-primary hover:bg-primary-dull text-white font-medium '>Place Order</button>) : (<button type="button" className='w-full h-11 bg-primary hover:bg-primary-dull text-white font-medium '>Proceed to Checkout</button>)}
+
+              {checkoutOption === "cod" ?
+                (<button type="button" onClick={codHandler} className='w-full h-11 bg-primary hover:bg-primary-dull text-white font-medium'>Place Order</button>) :
+                (<button type="button" className='w-full h-11 bg-primary hover:bg-primary-dull text-white font-medium '>Proceed to Checkout</button>)
+              }
               
             </div>
           </div>

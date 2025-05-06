@@ -8,14 +8,14 @@ export const AppContext = createContext();
 export const AppContextProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
-  const [user, setUser] = useState(false);  // context api for authentication
+  const [user, setUser] = useState(true);  // context api for authentication
   const [isSeller, setIsSeller] = useState(null); // context api for checking seller or buyer
   const [products, setProducts] = useState([]);  // context api for showing product
   const [cartItems, setCartItems] = useState({}); // context api for cart items 
   const [showLoginForm, setShowLoginForm] = useState(false); 
   const [searchQuery, setSearchQuery] = useState("");
   const [allAddresses, setAllAddresses] = useState([]);
-
+  const [myOrders, setMyOrders] = useState([]);
 
   // Fetch all Products
   const fetchProducts =  () => {
@@ -93,9 +93,10 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
-  }, [cartItems]);
+   
+  }, [cartItems ]);
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart, cartTotal, getTaxOnCartItems , getCartTotalAfterTax, allAddresses, setAllAddresses};
+  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart, cartTotal, getTaxOnCartItems , getCartTotalAfterTax, allAddresses, setAllAddresses, myOrders, setMyOrders};
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
