@@ -12,11 +12,13 @@ import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
 import AddAddress from "./pages/AddAddress.jsx";
 import MyOrders from "./pages/MyOrders.jsx";
+import SellerLogin from "./pages/seller/SellerLogin.jsx";
+import Seller from "./pages/seller/Seller.jsx";
 
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller");
-  const { showLoginForm } = useAppContext();
+  const { showLoginForm, isSeller } = useAppContext();
   return (  
     <div className="min-h-screen flex flex-col">
       {isSellerPath ? null : <Navbar />} 
@@ -31,6 +33,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/add-address" element={<AddAddress />} />
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/seller" element={isSeller ? <Seller /> : <SellerLogin />} />
         </Routes>
       </div>
       {isSellerPath ? null : <Footer />}
