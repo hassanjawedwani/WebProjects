@@ -2,6 +2,7 @@ import {  Lock, Mail, User } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { useAppContext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 
 const SellerLogin = () => {
@@ -20,17 +21,18 @@ const SellerLogin = () => {
     e.preventDefault();
     console.log(formData);
     setIsSeller(true);
-
+    toast.success("login successful")
   }
 
   useEffect(() => {
     if (isSeller) {
       navigate("/seller")
     }
-  }, [isSeller])
+  }, [isSeller, navigate]);
+
   return (
     <div className='w-full h-svh flex items-center justify-center bg-black/5 shadow'>
-      <form className='bg-white min-w-96 max-w-96 border border-gray-400 rounded-2xl p-6 shadow'>
+      <form className='bg-white m-5  w-96 border border-gray-400 rounded-2xl p-6 shadow'>
 
         <h1 className='text-2xl font-medium text-center text-slate-800'>Seller Login</h1>
         
@@ -46,6 +48,8 @@ const SellerLogin = () => {
         </div>
 
         <button type="submit" onClick={submitHandler} className='bg-primary hover:bg-primary-dull text-white w-full h-9 rounded-full my-3'>login</button>
+
+        <p className='text-slate-600 mb-3 pl-3 text-sm text-center '>Go to <span className='text-primary hover:text-primary-dull cursor-pointer' onClick={() => { navigate("/") }}>Home Page</span></p>
       
       </form>
     </div>

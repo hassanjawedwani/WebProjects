@@ -17,10 +17,11 @@ const Navbar = () => {
       </NavLink>
 
       {/*Desktop Menu*/}
-      <div className="hidden sm:flex items-center gap-8">
+      <div className="hidden sm:flex items-center gap-5">
+      <NavLink to="/seller" className='border border-slate-300 rounded-full px-4 py-1 text-sm text-gray-600'>Seller Dashboard</NavLink>
       <NavLink to="/" className={({ isActive }) => isActive ? "text-primary-dull font-semibold" : ""}>Home</NavLink>
       <NavLink to="/products" className={({ isActive }) => isActive ? "text-primary-dull font-semibold" : ""}>All Products</NavLink>
-      <NavLink to="/contact" className={({ isActive }) => isActive ? "text-primary-dull font-semibold" : ""}>Contact</NavLink>
+      <NavLink to="/contact" className={({ isActive }) => isActive ? "text-primary-dull font-semibold hidden md:flex" : "hidden md:flex"}>Contact</NavLink>
 
         <div className="hidden lg:flex text-sm gap-2 border border-gray-300 px-3 rounded-full items-center">
           <input type="text" onChange={(e) => { setSearchQuery(e.target.value); navigate("/products") }} placeholder="Search any Product" className=" py-1.5 w-full bg-transparent outline-none placeholder-gray-400" />
@@ -48,7 +49,8 @@ const Navbar = () => {
       </div>
 
       {/*Breadcrumbs Button*/}
-      <div  className="sm:hidden flex gap-5">
+      <div className="sm:hidden flex gap-5">
+        <NavLink to="/seller" className='border border-slate-300 rounded-full px-4 py-1 text-sm text-gray-600'>Seller Dashboard</NavLink>
         <div className="relative" onClick={() => navigate("/cart")}>
           <ShoppingCart className="cursor-pointer w-5 h-5" />
           <button className="absolute -top-2.5 -right-3 text-xs w-5 h-5 bg-primary/80 rounded-full ">{cartCount()}</button>
