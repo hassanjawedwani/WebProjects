@@ -8,7 +8,7 @@ const ProductDetails = () => {
   const { products, currency, cartItems, addToCart, removeToCart, navigate } = useAppContext();
   const [showcaseImageURL, setShowcaseImageURL] = useState("");
   const product = products.find(product => product._id === id);
-  const [relatedProducts, setRelatedProducts] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     setRelatedProducts(products.filter(productTemp => productTemp.category === product.category));

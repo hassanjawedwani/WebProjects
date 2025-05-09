@@ -24,11 +24,11 @@ const SellerLayout = () => {
         </div>
       </div>
       <div className='w-full h-[calc(100vh-48px)] flex'>
-        <div className='flex flex-col items-center gap-3 w-14 md:w-58 h-full pt-4 border-r border-r-gray-400'>
+        <div className='flex flex-col items-center gap-3 w-14 lg:w-58 h-full pt-4 border-r border-r-gray-400'>
           {sidebarLinks.length > 0 && sidebarLinks.map((sidebarLink, index) => (
             <NavLink to={sidebarLink.path} key={index} end={sidebarLink.path === "/seller"} className={({isActive}) => `w-full flex items-center gap-2 text-lg justify-center md:justify-start md:pl-4 py-1 ${isActive ? "bg-primary/40 border-r-4 border-r-primary-dull" : ""} `}>
              <img src={sidebarLink.icon} alt="" className='w-9' />
-             <p className='hidden md:block'>{sidebarLink.name}</p>
+             <p className='hidden lg:block'>{sidebarLink.name}</p>
            </NavLink>
           ))}
         </div>

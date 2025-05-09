@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppContext } from '../context/AppContext'
-import { assets, categories } from '../assets/assets';
+import { assets } from '../assets/assets';
 import { Link } from 'react-router';
 import toast from 'react-hot-toast';
 
 const Cart = () => {
-  const { cartCount, cartItems, setCartItems, products, currency, deleteToCart, cartTotal, getTaxOnCartItems, getCartTotalAfterTax, allAddresses, navigate, myOrders, setMyOrders} = useAppContext();
+  const { cartCount, cartItems, setCartItems, products, currency, deleteToCart, cartTotal, getTaxOnCartItems, getCartTotalAfterTax, allAddresses, navigate, setMyOrders} = useAppContext();
   const cartProducts = products.filter(product => cartItems[product._id]);
   const [checkoutOption, setCheckoutOption] = useState("cod");
   const [showAddresses, setShowAddresses] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(allAddresses[0] || "");
 
   const codHandler = () => {
-    console.log("cod handler")
 
     if (!currentAddress) {
       toast.error("Please enter address before placing order");
@@ -23,15 +22,13 @@ const Cart = () => {
       return;
     }
 
-    // cons/ole.log(cartProducts)
-    // console.log();
-
     setMyOrders(prevOrders => ([
       ...prevOrders,
       {
         orderId: Math.floor(Math.random() * 10000000000000),
         paymentMethod: checkoutOption,
         totalAmount: getCartTotalAfterTax(),
+        address: currentAddress,
         items: cartProducts.map(cartProduct => {
           return {
             image: cartProduct.image,
@@ -45,33 +42,8 @@ const Cart = () => {
         })
       }
     ]));
-
-
-
-    // for (const cartProductId in cartItems) {
-    //   const cartProductQuantity = cartItems[cartProductId];
-    //   const cartProduct = products.find(product => product._id === cartProductId);
-    //   setCartProducts(prevCartProducts => ([
-    //     ...prevCartProducts,
-    //     {
-    //       product: cartProduct,
-    //       quantity: cartProductQuantity
-    //     }
-    //   ]));
-    // }
-    
-    // setMyOrders(prevOrders => {
-    //   return [
-    //     ...prevOrders,
-    //     {
-         
-    //     }
-    //   ]
-    // })
-
-
-      toast.success("Order placed Successfully, check details in my orders pages")
-      navigate("my-orders");
+    toast.success("Order placed Successfully, check details in my orders pages")
+    navigate("my-orders");
   }
   
   
