@@ -2,6 +2,9 @@ import {  Lock, Mail, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router'
 import { useAppContext } from '../context/AppContext';
+import { default as axios } from 'axios';
+import toast from 'react-hot-toast';
+import axiosInstance from '../services/axiosInstance';
 
 const Login = () => {
   const [state, setState] = useState("login");
@@ -11,13 +14,35 @@ const Login = () => {
     password: ""
   }
   const [formData, setFormData] = useState(initialState); 
-  const { setShowLoginForm } = useAppContext();
+  const { setShowLoginForm, navigate } = useAppContext();
 
   const inputHandler = (e) => setFormData(prevData => ({ ...prevData, [e.target.name]: e.target.value }));
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      console.log(formData);
+      if (state === "login") {
+        return
+      } else {
+        let response = await axiosInstance.post("/api/user/register", formData); 
+        if (response.data?.success) {
+          toast.success(response.data?.message);
+          console.log(response);
+          navigate("/");
+          setShowLoginForm(false);
+        } else {
+          toast.error(response.data?.message);
+          console.log(response)
+        }
+        
+      }
+    } catch (error) {
+      const errorMessage = error?.response?.data?.message || error.message || "Something went wrong";
+      toast.error(errorMessage);
+      console.log(errorMessage);
+      return;
+    }
   }
 
   return (
