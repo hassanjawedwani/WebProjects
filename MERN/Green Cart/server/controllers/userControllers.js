@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-import registerSchema from "../validators/userValidators.js";
+import {registerSchema, loginSchema} from "../validators/userValidators.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
@@ -37,6 +37,52 @@ export const register = async (req, res) => {
     });
     
     return res.json({ success: true, message: "User Registered Successfully", user: { name: newUser.name, email: newUser.email } });
+    
+  } catch (err) {
+    const errorMessage = err.message;
+    console.log("Register controller error message: ", errorMessage);
+    return res.json({ success: false, message: errorMessage });
+  }
+}
+
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log(`Email: ${email}, Password: ${password}`);
+
+    // user custom validation
+    const { error } = loginSchema.validate({email, password});
+    if (error) {
+      const userValidationError = error.details[0].message;
+      return res.json({ success: false, message: userValidationError });
+    }
+
+    const user = await User.findOne({ email });
+
+    if(!user) {
+      return res.json({ success: false, message: "Email or Password are incorrect" });
+    }
+
+    
+    const isOwner = await bcrypt.compare(password, user.password);
+
+    if (!isOwner) {
+      return res.json({ success: false, message: "Email or Password are incorrect" });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h'
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      maxAge: 60 * 60 * 1000
+    });
+    
+    return res.json({ success: true, message: "User logined Successfully", user: { name: user.name, email: user.email } });
     
   } catch (err) {
     const errorMessage = err.message;

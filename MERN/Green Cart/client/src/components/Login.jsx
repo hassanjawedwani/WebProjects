@@ -2,7 +2,6 @@ import {  Lock, Mail, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { Link } from 'react-router'
 import { useAppContext } from '../context/AppContext';
-import { default as axios } from 'axios';
 import toast from 'react-hot-toast';
 import axiosInstance from '../services/axiosInstance';
 
@@ -21,21 +20,20 @@ const Login = () => {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      console.log(formData);
+      let response;
       if (state === "login") {
-        return
+        response = await axiosInstance.post("/api/user/login", formData); 
       } else {
-        let response = await axiosInstance.post("/api/user/register", formData); 
-        if (response.data?.success) {
-          toast.success(response.data?.message);
-          console.log(response);
-          navigate("/");
-          setShowLoginForm(false);
-        } else {
-          toast.error(response.data?.message);
-          console.log(response)
-        }
-        
+        response = await axiosInstance.post("/api/user/register", formData); 
+      }
+      if (response.data?.success) {
+        toast.success(response.data?.message);
+        console.log(response);
+        navigate("/");
+        setShowLoginForm(false);
+      } else {
+        toast.error(response.data?.message);
+        console.log(response)
       }
     } catch (error) {
       const errorMessage = error?.response?.data?.message || error.message || "Something went wrong";
@@ -55,16 +53,16 @@ const Login = () => {
           {state === "signup" && (
             <div className='flex items-center px-4 py-2 gap-2 rounded-full border border-gray-300 focus-within:border-primary-dull shadow '>
               <User />
-              <input onChange={inputHandler} value={formData.name} type="text" name='name'  className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm' placeholder='Name' />
+              <input onChange={inputHandler} value={formData.name} type="text" name='name'  className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm' placeholder='Name' required />
             </div>
           )}
           <div className='flex items-center px-4 py-2 gap-2 rounded-full border border-gray-300 mt-4 focus-within:border-primary-dull shadow '>
             <Mail />
-            <input type="text" onChange={inputHandler} value={formData.email} name="email" className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm ' placeholder='Email' />
+            <input type="text" onChange={inputHandler} value={formData.email} name="email" className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm ' placeholder='Email' required />
           </div>
           <div className='flex items-center px-4 py-2 gap-2 rounded-full border border-gray-300 mt-4 focus-within:border-primary-dull shadow '>
             <Lock />
-            <input type="text" onChange={inputHandler} value={formData.password} name="password" className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm ' placeholder='Password' />
+            <input type="text" onChange={inputHandler} value={formData.password} name="password" className='w-full outline-none text-slate-600 placeholder:text-slate-400 text-sm ' placeholder='Password' required/>
           </div>
         </div>
 
