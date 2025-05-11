@@ -8,7 +8,7 @@ export const AppContext = createContext();
 export const AppContextProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
-  const [user, setUser] = useState(false);  // context api for authentication
+  const [user, setUser] = useState(true);  // context api for authentication
   const [isSeller, setIsSeller] = useState(null); // context api for checking seller or buyer
   const [products, setProducts] = useState([]);  // context api for showing product
   const [cartItems, setCartItems] = useState({}); // context api for cart items 

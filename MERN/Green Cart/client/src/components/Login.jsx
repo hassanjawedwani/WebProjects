@@ -13,7 +13,7 @@ const Login = () => {
     password: ""
   }
   const [formData, setFormData] = useState(initialState); 
-  const { setShowLoginForm, navigate } = useAppContext();
+  const { setShowLoginForm, navigate , setUser} = useAppContext();
 
   const inputHandler = (e) => setFormData(prevData => ({ ...prevData, [e.target.name]: e.target.value }));
 
@@ -29,8 +29,9 @@ const Login = () => {
       if (response.data?.success) {
         toast.success(response.data?.message);
         console.log(response);
-        navigate("/");
         setShowLoginForm(false);
+        setUser(true);
+        navigate("/");
       } else {
         toast.error(response.data?.message);
         console.log(response)

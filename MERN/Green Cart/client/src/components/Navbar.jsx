@@ -3,10 +3,31 @@ import { NavLink } from "react-router";
 import { assets } from "../assets/assets";
 import { Search, AlignJustify, ShoppingCart } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
+import axiosInstance from "../services/axiosInstance";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, navigate, setShowLoginForm, setSearchQuery, cartCount} = useAppContext();
+  const { user, setUser, navigate, setShowLoginForm, setSearchQuery, cartCount } = useAppContext();
+  
+  const logoutHandler = async () => {
+    console.log("logout handler")  
+    try {
+      setOpen(false);
+      const response = await axiosInstance.post("/api/user/logout");
+      if (response.data?.message) {
+        const message = response.data?.message;
+        console.log(message);
+        toast.success(message);
+        navigate("/");
+        setUser(false);
+      }
+    } catch (err) {
+      const errorMessage = err.response?.message || err.message
+      console.log(errorMessage);
+      toast.error(errorMessage)
+    }
+  }
 
   return (
     <nav className="flex justify-between items-center px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-40 py-4 border-b border-gray-300 bg-white  transition-all sticky top-0 z-20">
@@ -40,7 +61,7 @@ const Navbar = () => {
               <img src={assets.profile_icon} alt="profile icons" className="w-10 h-10"/>
               <ul className="hidden group-hover:block text-sm absolute top-10 right-0 shadow py-2.5 w-24 rounded-md z-10 bg-white border border-gray-300">
                 <li className="pl-3 p-1.5 cursor-pointer hover:bg-primary/10" onClick={() => navigate("/my-orders")}>My Orders</li>
-                <li className="pl-3 p-1.5 cursor-pointer hover:bg-primary/10" onClick={() => { setUser(false) }}>Logout</li>
+                <li className="pl-3 p-1.5 cursor-pointer hover:bg-primary/10" onClick={logoutHandler}>Logout</li>
               </ul>
             </div>
         )
@@ -77,7 +98,7 @@ const Navbar = () => {
 
         {user
           ?
-          (<button className="cursor-pointer px-6 py-2 bg-primary hover:bg-primary-dull text-white rounded-full text-sm mt-2 transition" onClick={() => { setOpen(false); setUser(false); } }>
+          (<button className="cursor-pointer px-6 py-2 bg-primary hover:bg-primary-dull text-white rounded-full text-sm mt-2 transition" onClick={logoutHandler}>
           Logout
           </button>)
           :

@@ -82,11 +82,44 @@ export const login = async (req, res) => {
       maxAge: 60 * 60 * 1000
     });
     
-    return res.json({ success: true, message: "User logined Successfully", user: { name: user.name, email: user.email } });
+    return res.json({ success: true, message: "User logined Successfully", user: { name: user.name, email: user.email } });``
     
   } catch (err) {
     const errorMessage = err.message;
     console.log("Register controller error message: ", errorMessage);
+    return res.json({ success: false, message: errorMessage });
+  }
+}
+
+
+export const authme = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select('-password');
+    return res.json({ success: true, message: "User is authorized", user });
+  } catch (err) {
+    const errorMessage = err.message;
+    console.log(errorMessage);
+    return res.json({ success: false, message: errorMessage });
+  }
+}
+
+
+export const logout = async (req, res) => {
+  try {
+
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      
+    });
+    
+    return res.json({ success: true, message: "User logout Successfully" });
+    
+  } catch (err) {
+    const errorMessage = err.message;
+    console.log(errorMessage);
     return res.json({ success: false, message: errorMessage });
   }
 }

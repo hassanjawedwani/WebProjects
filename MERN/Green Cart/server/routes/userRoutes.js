@@ -1,5 +1,6 @@
 import express from 'express';
-import { login, register } from '../controllers/userControllers.js';
+import { authme, login, logout, register } from '../controllers/userControllers.js';
+import { isAuth } from '../middlewares/isAuth.js';
 const router = express.Router();
 
 router
@@ -9,5 +10,13 @@ router
 router
   .route("/login")
   .post(login);
+
+router
+  .route("/logout")
+  .post(logout);
+
+router
+  .route("/authme")
+  .get(isAuth, authme);
  
 export default router;
