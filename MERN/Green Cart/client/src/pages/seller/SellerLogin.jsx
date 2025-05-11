@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import axiosInstance from '../../services/axiosInstance';
 
 
 const SellerLogin = () => {
@@ -17,11 +18,27 @@ const SellerLogin = () => {
 
   const inputHandler = (e) => setFormData(prevData => ({ ...prevData, [e.target.name]: e.target.value }));
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    setIsSeller(true);
-    toast.success("login successful")
+  const submitHandler = async (e) => {
+    
+    try {
+      e.preventDefault();
+      let response = await axiosInstance.post("/api/seller/login", formData); 
+      if (response.data?.success) {
+        toast.success(response.data?.message);
+        console.log(response);
+        setIsSeller(true);
+        toast.success("login successful")
+     
+      } else {
+        toast.error(response.data?.message);
+        console.log(response)
+      }
+    } catch (error) {
+      const errorMessage = error?.response?.data?.message || error.message || "Something went wrong";
+      toast.error(errorMessage);
+      console.log(errorMessage);
+      return;
+    }
   }
 
   useEffect(() => {

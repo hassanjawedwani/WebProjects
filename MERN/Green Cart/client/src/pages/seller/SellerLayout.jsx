@@ -3,6 +3,7 @@ import { assets } from '../../assets/assets'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
 import { Link, NavLink, Outlet } from 'react-router'
+import axiosInstance from '../../services/axiosInstance'
 
 const sidebarLinks = [
   { name:"Add Product", path:"/seller", icon:assets.add_icon, },
@@ -10,8 +11,28 @@ const sidebarLinks = [
   { name:"Orders", path:"/seller/orders", icon:assets.order_icon },
 ];
 
+
 const SellerLayout = () => {
-  const { setIsSeller } = useAppContext()
+  const { setIsSeller, navigate } = useAppContext()
+  
+  const logoutHandler = async () => {
+    console.log("logout handler")
+    try {
+      const response = await axiosInstance.post("/api/seller/logout");
+      if (response.data?.message) {
+        const message = response.data?.message;
+        console.log(message);
+        toast.success(message);
+        navigate("/");
+        setIsSeller(false)
+      }
+    } catch (err) {
+      const errorMessage = err.response?.message || err.message
+      console.log(errorMessage);
+      toast.error(errorMessage)
+    }
+  }
+
   return (
     <div>
       <div className='flex justify-between items-center h-12 border-b border-b-slate-400 px-4 bg-white z-200'>
@@ -20,7 +41,7 @@ const SellerLayout = () => {
         </Link>
         <div className="flex gap-2 items-center text-gray-500">
           <p>Hi Admin</p>
-          <button type='button' onClick={() => { setIsSeller(false); toast.success("logout successfully") }} className='border border-b-slate-400 rounded-full px-4 py-1'>logout</button>
+          <button type='button' onClick={logoutHandler} className='border border-b-slate-400 rounded-full px-4 py-1'>logout</button>
         </div>
       </div>
       <div className='w-full h-[calc(100vh-48px)] flex'>
