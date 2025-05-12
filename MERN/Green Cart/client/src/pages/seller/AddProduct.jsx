@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import { assets } from '../../assets/assets'
 
+import axiosInstance from '../../services/axiosInstance';
+import { useAppContext } from '../../context/AppContext'
+
+import toast from 'react-hot-toast';
+
 const AddProduct = () => {
-  const [formData, setFormData] = useState({
+
+  const initialFormState = {
     images: [],
     productName: '',
     productDescription: '',
     productCategory: '',
     productPrice: 0,
     offerPrice: 0,
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
+
+  const { navigate } = useAppContext();
     
   const productCategories = [
     "Vegetable",
@@ -21,9 +31,43 @@ const AddProduct = () => {
     "Grains"
   ];
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
+    console.log("submit handler")
+    console.log(formData)
+
     e.preventDefault();
-    console.log(formData);
+
+    const fd = new FormData();
+
+    formData.images.forEach(image => fd.append("image", image));
+    fd.append("name", formData.productName);
+    fd.append("description", formData.productDescription);
+    fd.append("category", formData.productCategory);
+    fd.append("price", formData.productPrice);
+    fd.append("offerPrice", formData.offerPrice);
+
+    try {
+      const response = await axiosInstance.post("api/product/add", fd, {
+        headers: {"Content-Type": "multipart/formdata"}
+      });
+      if (response.data?.success) {
+        toast.success(response.data?.message);
+        navigate("/seller");
+        setFormData(initialFormState);
+        console.log(response);
+      } else {
+        toast.error(response.data?.message);
+        console.log(response)
+      }
+    } catch (error) {
+      const errorMessage = error?.response?.data?.message || error.message || "Something went wrong";
+      toast.error(errorMessage);
+      console.log(errorMessage);
+      return;
+    }
+     
+    
+
   }
 
   const imageUploadHandler = (e) => {
@@ -44,7 +88,7 @@ const AddProduct = () => {
   }
 
   return (
-    <form onSubmit={submitHandler} className='bg-white max-w-lg flex flex-col gap-5'>
+    <form onSubmit={submitHandler}  className='bg-white max-w-lg flex flex-col gap-5'>
       {/* Product Image Section  */}
       <div>
         <p className='font-medium text-slate-800 mb-2.5'>Product Image</p>

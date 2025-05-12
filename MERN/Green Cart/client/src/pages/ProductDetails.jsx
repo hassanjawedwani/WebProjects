@@ -50,9 +50,10 @@ const ProductDetails = () => {
               </div>
               <div>
                 <p className='text-uppercase text-slate-700 font-medium'>About Product</p>
-                <ul className='text-xs text-slate-500 list-disc pl-4.5' >
+                {/* <ul className='text-xs text-slate-500 list-disc pl-4.5' >
                   {product.description && product.description.map((desc, index) => <li key={index}>{desc}</li>)}
-                </ul>
+                </ul> */}
+                  <p className='text-xs text-slate-500 pl-4.5'>{product.description}</p>
               </div>
               <div className='flex justify-evenly gap-5 '>
                 {cartItems[product._id] 

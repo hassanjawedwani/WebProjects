@@ -1,6 +1,6 @@
 import express from 'express';
 import { login, logout } from '../controllers/sellerControllers.js';
-import { isAuth } from '../middlewares/isSellerAuth.js';
+import { isSellerAuth } from '../middlewares/isSellerAuth.js';
 import { authme } from '../controllers/sellerControllers.js';
 const router = express.Router();
 
@@ -14,6 +14,6 @@ router
 
 router
   .route("/authme")
-  .get(isAuth, authme);
+  .get(isSellerAuth, authme);
  
 export default router;

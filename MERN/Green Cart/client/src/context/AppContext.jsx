@@ -2,13 +2,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
+import Product from "../../../server/models/productModel";
+import axiosInstance from '../services/axiosInstance';
+import User from "../../../server/models/userModel";
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
-  const [user, setUser] = useState(true);  // context api for authentication
+  const [contextUser, setContextUser] = useState(null);
+  const [user, setUser] = useState(false);  // context api for authentication
   const [isSeller, setIsSeller] = useState(null); // context api for checking seller or buyer
   const [products, setProducts] = useState([]);  // context api for showing product
   const [cartItems, setCartItems] = useState({}); // context api for cart items 
@@ -18,8 +22,16 @@ export const AppContextProvider = ({ children }) => {
   const [myOrders, setMyOrders] = useState([]);
 
   // Fetch all Products
-  const fetchProducts =  () => {
-    setProducts(dummyProducts);
+  const fetchProducts = async () => {
+    try {
+      const response = await axiosInstance.get("/api/product/list")
+      if (response.data?.success) {
+        setProducts(response.data?.products);
+      }
+
+    } catch (err) {
+      toast.error(err.message);
+    }
   }
 
   // add product to cart
@@ -89,14 +101,56 @@ export const AppContextProvider = ({ children }) => {
     return cartTotal() + getTaxOnCartItems();
   }
 
+  const updateUserCart = async () => {
+    try {
+      const response = await axiosInstance.post("/api/cart/update", cartItems);
+      if (response.data.success) {
+        toast.success("cart updated");
+      } else {
+        toast.error(response?.data?.message);
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || err.message);
+    }
+  }
+
+  const initializeCartItems = async () => {
+    try {
+      const response = await axiosInstance.get("/api/user/authme")
+      if (response.data?.success) {
+        setCartItems(response.data?.user.cartItems);
+      }
+
+    } catch (err) {
+      toast.error(err.message);
+    }
+   
+  }
+
+  useEffect(() => {
+    if (contextUser) {
+      initializeCartItems();
+    }
+  }, [contextUser]);
+
+   useEffect(() => {
+    if (contextUser) {
+      initializeCartItems();
+    }
+  }, [myOrders]);
+
+  
 
 
   useEffect(() => {
     fetchProducts();
-   
-  }, [cartItems ]);
+    console.log("dfsa", contextUser)
+    if (contextUser) {
+      updateUserCart();
+    }
+  }, [cartItems]);
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart, cartTotal, getTaxOnCartItems , getCartTotalAfterTax, allAddresses, setAllAddresses, myOrders, setMyOrders};
+  const value = { navigate, user, setUser, isSeller, setIsSeller, products, currency, addToCart, cartItems, removeToCart, setShowLoginForm, showLoginForm, searchQuery, setSearchQuery, cartCount, setCartItems, deleteToCart, cartTotal, getTaxOnCartItems , getCartTotalAfterTax, allAddresses, setAllAddresses, myOrders, setMyOrders, contextUser, setContextUser};
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

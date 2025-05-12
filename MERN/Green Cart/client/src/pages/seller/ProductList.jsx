@@ -1,9 +1,21 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext';
 import { assets } from '../../assets/assets';
+import axiosInstance from '../../services/axiosInstance';
+import toast from 'react-hot-toast';
 
 const ProductList = () => {
   const { products, setProducts, currency } = useAppContext();
+  const stockChangeHandler = async (id) => {
+    try {
+      const response = await axiosInstance.post(`/api/product/${id}/stock`)
+      if (response.data?.success) {
+        toast.success("stock updated")
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  }
   console.log(products)
   return (
     <div>
@@ -31,7 +43,7 @@ const ProductList = () => {
                 <td className='text-start px-4 py-2 text-slate-600 truncate'>{currency}{product.price}</td>
                 <td className='text-start px-4 py-2  text-slate-600 truncate'>
                   <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                    <input type="checkbox" className="sr-only peer" defaultChecked={product.inStock} />
+                    <input type="checkbox" onClick={() => stockChangeHandler(product._id)} className="sr-only peer" defaultChecked={product.inStock} />
                     <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
                     <span className="dot absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                   </label>   

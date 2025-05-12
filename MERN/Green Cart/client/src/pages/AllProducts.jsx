@@ -6,6 +6,7 @@ import { useAppContext } from '../context/AppContext';
 
 const AllProducts = () => {
   const { products, currency, addToCart, cartItems, removeToCart, searchQuery, navigate } = useAppContext();
+  console.log(products);
   let allProducts;
   if (searchQuery.length > 0) {
     allProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery.toLowerCase()) && product.inStock);

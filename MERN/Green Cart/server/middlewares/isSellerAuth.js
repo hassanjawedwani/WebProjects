@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const isAuth = (req, res, next) => {
+export const isSellerAuth = (req, res, next) => {
   try {
     console.log("im middleware");
     const { sellerToken } = req.cookies;
