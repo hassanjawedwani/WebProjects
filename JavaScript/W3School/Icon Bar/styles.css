@@ -1,0 +1,18 @@
+.nav-links {
+	display: flex;
+	background-color: gray; 
+}
+
+.nav-links a {
+	padding: 2rem;
+	transition: all 0.3s ease;
+}
+
+.nav-links i {
+	font-size: 3rem;
+	color: white;
+}
+
+.nav-links a:hover {
+	background-color: black;
+}
