@@ -1,0 +1,36 @@
+.tab button.active {
+	background-color: violet ;
+
+
+}
+
+.tab {
+	display: flex;
+	background-color: blueviolet;
+}
+
+
+.tab button{
+	width: 5rem;
+	height: 2rem;
+	background-color: transparent;
+	color: white;
+	border: 0;
+}
+
+.tab button:hover {
+	background-color: rgb(112, 26, 192);
+}
+
+
+.tabContent {
+	border: 1px solid gray;
+	padding: 4px;
+	display: none;
+}
+
+
+
+.tabContent.active {
+	display: block;
+}
