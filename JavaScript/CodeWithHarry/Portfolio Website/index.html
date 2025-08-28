@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <title>Hassan's Portfolio Website</title>
   </head>
   <body>
@@ -25,16 +26,47 @@
         </ul>
       </nav>
     </header>
-		<main>
-			<section class="hero-section">
-				<div>
-					
-					<h1>Hi! My Name is <span class="hero-name">Hassan</span> and i am a Passionate Web Developer</h1>
-				</div>
-				<div>
-					<img src="assets/hero.jpg" alt="hero image" class="hero-image">
-				</div>
-			</section>
-		</main>
+    <main>
+      <section class="hero-section">
+        <div>
+          <h1>
+            Hi! My Name is <span class="hero-name">Hassan</span> and i am a
+            <span id="element" class="hero-name"></span>
+          </h1>
+        </div>
+        <div>
+          <img src="assets/hero.jpg" alt="hero image" class="hero-image" />
+        </div>
+      </section>
+      <section class="experience-section">
+        <hr />
+        <!-- <span class="header-text">What i have done so far</span>
+        <h2>Work Experience</h2> -->
+      </section>
+    </main>
+    <footer>
+      <h3>Hassan Developer Portfolio</h3>
+      <div>
+        <ul>
+          Home
+        </ul>
+        <ul>
+          About
+        </ul>
+        <ul>
+          Contact Us
+        </ul>
+      </div>
+    </footer>
+    <script>
+      var typed = new Typed("#element", {
+        strings: [
+          "Passionate Web Developer.",
+          "Nextjs Developer.",
+          "Reactjs Developer.",
+        ],
+        typeSpeed: 50,
+      });
+    </script>
   </body>
 </html>

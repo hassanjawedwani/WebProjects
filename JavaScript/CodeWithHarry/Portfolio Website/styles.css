@@ -13,28 +13,26 @@ body {
 }
 
 main {
-	padding-left: 4rem;
-	padding-right: 4rem;
-	max-width: 1440px;
-	margin-left: auto;
-	margin-right: auto;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 .header {
   display: flex;
   justify-content: space-between;
-	align-items: center;
-	background-color: rgb(1, 1, 83);
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	padding-left: 4rem;
-	padding-right: 4rem;
-	
+  align-items: center;
+  background-color: rgb(1, 1, 83);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .logo {
-	font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .nav ul {
@@ -44,27 +42,51 @@ main {
 }
 
 .hero-section {
-	display: flex;
-	justify-content: space-between;
-	padding-top: 4rem;
-	padding-bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .hero-section div:first-child {
-	font-size: 1.4rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-section div {
-	width: 35%;
+  width: 35%;
 }
 
 .hero-section .hero-image {
-	width: 100%
+  width: 100%;
 }
 
 .hero-name {
-	color: blueviolet;
+  color: blueviolet;
+}
+
+.experience-section {
+  margin-top: 7rem;
+}
+
+.experience-section hr {
+	margin-bottom: 2rem;
+}
+
+.experience-section h2 {
+  font-size: 1.9rem;
+}
+
+.experience-section .header-text {
+  color: gray;
+}
+
+footer {
+	max-width: 1440px;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 5rem;
 }
