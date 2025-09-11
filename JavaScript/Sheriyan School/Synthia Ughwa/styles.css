@@ -1,0 +1,36 @@
+@font-face {
+	font-family: "General Sans";
+	src: url("/public/font/GeneralSans/GeneralSans-Regular.otf") format("opentype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+	font-family: "General Sans";
+}
+
+
+body {
+  background-color: black;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+#logo {
+  color: white;
+  text-decoration: none;
+}
+
+#hero {
+  height: 100vh;
+}
