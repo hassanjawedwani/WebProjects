@@ -1,9 +1,33 @@
 @font-face {
-	font-family: "General Sans";
-	src: url("/public/font/GeneralSans/GeneralSans-Regular.otf") format("opentype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
+  font-family: "General Sans";
+  src: url("/public/font/GeneralSans/GeneralSans-Regular.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/public/font/GeneralSans/GeneralSans-Semibold.otf");
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/public/font/GeneralSans/GeneralSans-Bold.otf");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/public/font/GeneralSans/GeneralSans-Medium.otf");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
 }
 
 *,
@@ -12,18 +36,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-	font-family: "General Sans";
+  font-family: "General Sans";
 }
-
 
 body {
   background-color: black;
+  padding: 2rem;
+  color: white;
+}
+
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 }
 
 nav {
   display: flex;
   justify-content: space-between;
-  color: white;
+  font-size: 18px;
 }
 
 #logo {
@@ -31,6 +64,63 @@ nav {
   text-decoration: none;
 }
 
-#hero {
-  height: 100vh;
+#heroTitle {
+  font-size: 7rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 6rem;
+  text-transform: uppercase;
+  padding: 5rem 0rem;
+  font-weight: 600;
+  width: max-content;
+}
+
+#heroTitle #heroTitleFirstPart {
+  opacity: 0.6;
+  
+}
+
+#heroTitle #heroTitleSecondPart {
+  padding-left: 6rem;
+  opacity: 0.6;
+
+}
+
+#heroTitle #heroTitleThirdPart {
+  font-size: 1rem;
+  text-align: end;
+  line-height: normal;
+  font-weight: normal;
+}
+
+
+.availablity {
+ display: flex;
+ flex-direction: column;
+ align-items: end;
+ font-size: 18px;
+ font-weight: 500;
+}
+
+
+#heroFooter {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+
+.twoArrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.downArrow {
+  background-color: white;
+  color: black;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
