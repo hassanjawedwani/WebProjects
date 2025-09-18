@@ -41,7 +41,7 @@
 
 body {
   background-color: black;
-  padding: 2rem;
+  padding: 0 2rem;
   color: white;
 }
 
@@ -50,13 +50,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  padding: 1rem 0;
 }
 
 #logo {
@@ -77,13 +77,11 @@ nav {
 
 #heroTitle #heroTitleFirstPart {
   opacity: 0.6;
-  
 }
 
 #heroTitle #heroTitleSecondPart {
   padding-left: 6rem;
   opacity: 0.6;
-
 }
 
 #heroTitle #heroTitleThirdPart {
@@ -93,20 +91,19 @@ nav {
   font-weight: normal;
 }
 
-
 .availablity {
- display: flex;
- flex-direction: column;
- align-items: end;
- font-size: 18px;
- font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  font-size: 18px;
+  font-weight: 500;
 }
-
 
 #heroFooter {
   text-transform: uppercase;
   display: flex;
   justify-content: space-between;
+  padding: 1rem 0;
 }
 
 .twoArrows {
@@ -119,8 +116,48 @@ nav {
   color: black;
   border-radius: 100%;
   width: 30px;
-  height: 30px;;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#secondSection {
+  width: 80%;
+}
+
+#secondSection div {
+  border-bottom: 1px solid #888;
+  display: flex;
+  color: #888;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  position: relative;
+  padding: 1rem 0;
+}
+
+#secondSection div:first-child {
+  height: 9rem;
+}
+
+#secondSection h2 {
+  font-size: 5vw;
+  font-weight: 400;
+}
+
+#secondSection span {
+  font-size: 1rem;
+}
+
+#secondSection img {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  z-index: 999;
+  display: none;
+}
+
+#secondSection div:hover img {
+  display: block;
 }
