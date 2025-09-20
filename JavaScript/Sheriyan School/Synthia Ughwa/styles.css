@@ -161,3 +161,55 @@ nav {
 #secondSection div:hover img {
   display: block;
 }
+
+#about-wrapper {
+  width: 90%;
+  padding: 5% 0;
+}
+
+#about {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  width: fit-content;
+  gap: 1rem;
+}
+
+#about-me {
+  max-width: 400px;
+}
+
+#about-me h2 {
+  color: #888;
+  font-size: medium;
+}
+
+#about img {
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+
+#about-me button {
+  padding: 4px 16px;
+  background-color: transparent;
+  color: white;
+  border-radius: 20px;;
+  margin-top: 1rem;
+}
+
+#subcribe {
+  padding: 2rem 0;
+}
+#subcribe h5{
+  color: #888;
+  margin-bottom: 4px;
+}
+
+#subcribe a {
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+}
