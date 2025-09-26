@@ -30,6 +30,10 @@
   font-style: normal;
 }
 
+html {
+  scroll-behavior: smooth ;
+}
+
 *,
 *::before,
 *::after {
@@ -212,4 +216,22 @@ nav {
   background-color: transparent;
   color: white;
   text-decoration: none;
+}
+
+#footer {
+  padding: 1rem 0;
+}
+
+
+#footer, #footer-left, #footer-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+#footer  a, #footer-left {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500px;;
+  color: white;
 }
